@@ -50,4 +50,3 @@ def register():
                        score]
     pickle.dump(users, open("users.dat", "wb"))
 
-register()

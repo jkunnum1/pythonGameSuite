@@ -9,6 +9,7 @@ class RegisterGUI:
         self.__mainWindow = tkinter.Tk()
         self.__mainWindow.wm_title("Register")
 
+        self.__registered = False
         self.__userFrame = tkinter.Frame(self.__mainWindow)
         self.__passFrame = tkinter.Frame(self.__mainWindow)
         self.__confirmPassFrame = tkinter.Frame(self.__mainWindow)
