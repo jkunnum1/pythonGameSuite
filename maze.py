@@ -4,24 +4,30 @@ import Barriers
 
 pygame.init()
 
+# append score each time there is a game over
 totalScore = []
-
-white = (255, 255, 255) # set colors rgb
+# set colors rgb
+white = (255, 255, 255) 
 black = (0,0, 0)
 red = (255, 0, 0)
 green = (0, 155, 0)
 orange = (255, 165, 0)
 teal = (32, 178, 170)
-
+# set display dimensions
 displayWidth = 800
 displayHeight = 600
+# set width of block
+blockSize = 10
+
 # returns a game surface object for the game
 gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
 
 # set title of the game
 pygame.display.set_caption('Mazerunner')
+# set background
+backgroundImage = pygame.image.load("mazeBackground.png").convert()
+gameDisplay.blit(backgroundImage, [0,0])
 
-blockSize = 10
 # updates the surface
 pygame.display.update()
 
@@ -64,16 +70,21 @@ def gameLoop():
     addBarrier(barriers)
     while not gameExit:
         while gameOver:
+            # print instructions to continue and check for input
             messageToScreen("Game over, press p to play to e to exit", red)
             pygame.draw.rect(gameDisplay, orange, [leadX, leadY, blockSize,
                                                   blockSize])
             pygame.display.update()
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    gameExit = True
+                    gameOver = False
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_e:
                         gameExit = True
                         gameOver = False
                     if event.key == pygame.K_p:
+                        # re-assign the variables to the start positions
                         gameOver = False
                         gameExit = False
                         leadX = displayWidth / 2
@@ -102,8 +113,7 @@ def gameLoop():
 
         # add changes to the x coordinate of the vehicle
         leadX += leadXChange
-        # set background to white
-        gameDisplay.fill(teal)
+        gameDisplay.blit(backgroundImage, [0,0])
         snake(leadX, leadY, blockSize)
         # make rectangle (where, color, [coordinateX, coordinateY, width, height])
         for obj in barriers:
