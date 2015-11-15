@@ -4,15 +4,17 @@ import Barriers
 
 pygame.init()
 
+totalScore = []
+
 white = (255, 255, 255) # set colors rgb
 black = (0,0, 0)
 red = (255, 0, 0)
 green = (0, 155, 0)
 
-display_width = 800
-display_height = 600
+displayWidth = 800
+displayHeight = 600
 # returns a game surface object for the game
-gameDisplay = pygame.display.set_mode((display_width, display_height))
+gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
 
 # set title of the game
 pygame.display.set_caption('Mazerunner')
@@ -23,41 +25,44 @@ pygame.display.update()
 
 # frames per second and font
 clock = pygame.time.Clock()
-frame_per_sec = 15
+framePerSec = 15
 font = pygame.font.SysFont(None, 30)
 
+def displayScore(score):
+    screenText = font.render(str(score), True, green)
+    gameDisplay.blit(screenText, [10, 10])
+
 # prints whatever message you give with color specified
-def message_to_screen(msg, color):
-    screen_text = font.render(msg, True, color)
-    gameDisplay.blit(screen_text, [display_width / 2, display_height / 2])
+def messageToScreen(msg, color):
+    screenText = font.render(msg, True, color)
+    gameDisplay.blit(screenText, [displayWidth / 2, displayHeight / 2])
 
 # redraws the vehicle 
-def snake(lead_x, lead_y, block_size):
-    pygame.draw.rect(gameDisplay, green, [lead_x, lead_y, blockSize, blockSize])
+def snake(leadX, leadY, blockSize):
+    pygame.draw.rect(gameDisplay, green, [leadX, leadY, blockSize, blockSize])
 
 # adds a new barrier to the list
 def addBarrier(barriers):
-    barrier = Barriers.Barriers(display_width, display_height, blockSize)
+    barrier = Barriers.Barriers(displayWidth, displayHeight, blockSize)
     barriers.append(barrier)
-    if barriers[0].getY() > display_height:
+    if barriers[0].getY() > displayHeight:
         del barriers[0]
 
 def gameLoop():
     gameExit = False
     gameOver = False
-    lead_x = display_width / 2
-    lead_y = display_height / 2
-    lead_x_change = 0
-    lead_y_change = 0
+    leadX = displayWidth / 2
+    leadY = displayHeight / 2
+    leadXChange = 0
+    score = 0
     counter = 0
     barriers = []
     addBarrier(barriers)
     while not gameExit:
         while gameOver:
             gameDisplay.fill(white)
-            message_to_screen("Game over, press p to play to e to exit", red)
+            messageToScreen("Game over, press p to play to e to exit", red)
             pygame.display.update()
-
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_e:
@@ -66,10 +71,11 @@ def gameLoop():
                     if event.key == pygame.K_p:
                         gameOver = False
                         gameExit = False
-                        lead_x = display_width / 2
-                        lead_y = display_height / 2
-                        lead_x_change = 0
-                        lead_y_change = 0
+                        leadX = displayWidth / 2
+                        leadY = displayHeight / 2
+                        leadXChange = 0
+                        totalScore.append(score)
+                        score = 0
                         barriers = []
         # for every time that there is an event
         for event in pygame.event.get():
@@ -79,43 +85,43 @@ def gameLoop():
             if event.type == pygame.KEYDOWN:
                 # if left/right key is pressed, add/subtract change in x
                 if event.key == pygame.K_LEFT:
-                    lead_x_change = -blockSize
+                    leadXChange = -blockSize
                 if event.key == pygame.K_RIGHT:
-                    lead_x_change = blockSize
+                    leadXChange = blockSize
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    lead_x_change = 0
-                if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    lead_y_change = 0
+                    leadXChange = 0
         # check that the vehicle is still on the screen
-        if lead_x >= display_width or lead_x < 0 or lead_y >= display_height or lead_y < 0:
+        if leadX >= displayWidth or leadX < 0 or leadY >= displayHeight or leadY < 0:
             gameOver = True
 
-        # add changes to the x,y coordinates of the vehicle
-        lead_x += lead_x_change
-        lead_y += lead_y_change
+        # add changes to the x coordinate of the vehicle
+        leadX += leadXChange
         # set background to white
         gameDisplay.fill(white)
-        snake(lead_x, lead_y, blockSize)
+        snake(leadX, leadY, blockSize)
         # make rectangle (where, color, [coordinateX, coordinateY, width, height])
         for obj in barriers:
             obj.moveY()
             pygame.draw.rect(gameDisplay, black, [obj.getX(),
                                                   obj.getY(),
                                                   obj.getWidth(), blockSize])
-            if ((lead_x >= obj.getX() and
-                lead_x <= obj.getX() + obj.getWidth()) and
-                lead_y == obj.getY()):
+            # check to see if there is a collision, else add point to score
+            if ((leadX >= obj.getX() and
+                leadX <= obj.getX() + obj.getWidth()) and
+                leadY == obj.getY()):
                 gameOver = True
+            if obj.getY() + 10 == leadY:
+                score += 1
+        displayScore(score)
         pygame.display.update()
         counter += 1
         if counter % 10 == 0:
             addBarrier(barriers)
             pygame.display.update()
-        
 
         # sleep -> frames per second (lower number = slower)
-        clock.tick(frame_per_sec)
+        clock.tick(framePerSec)
         
     
     # un-initializes and quits pygame
