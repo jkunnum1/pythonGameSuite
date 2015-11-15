@@ -25,7 +25,7 @@ pygame.display.update() # -> updates everything or what is specified in the para
 
 # frames per second and font
 clock = pygame.time.Clock()
-frame_per_sec = 30
+frame_per_sec = 15
 font = pygame.font.SysFont(None, 30)
 
 
