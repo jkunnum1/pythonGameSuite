@@ -5,7 +5,7 @@ import Barriers
 pygame.init()
 
 # append score each time there is a game over
-totalScore = []
+totalScore = [0]
 # set colors rgb
 white = (255, 255, 255) 
 black = (0,0, 0)
@@ -37,15 +37,26 @@ framePerSec = 15
 font = pygame.font.SysFont(None, 40)
 
 def displayScore(score):
-    screenText = font.render(str(score), True, green)
+    # display high score and current score
+    msg = "H: " + str(max(totalScore))
+    screenText = font.render(msg, True, orange)
     gameDisplay.blit(screenText, [10, 10])
+    msg = "C: " + str(score)
+    screenText = font.render(msg, True, orange)
+    gameDisplay.blit(screenText, [10, 40])
 
 # prints whatever message you give with color specified
-def messageToScreen(msg, color):
+def messageToScreen(msg, color, score):
+    if score > max(totalScore):
+        msg2 = "You have a new high of " + str(score)
+        screenText = font.render(msg2, True, color)
+        gameDisplay.blit(screenText, [displayWidth // 4, 40])
     screenText = font.render(msg, True, color)
-    textPosition = screenText.get_rect()
-    textPosition.centerx = gameDisplay.get_rect().centerx
-    gameDisplay.blit(screenText, textPosition)
+    gameDisplay.blit(screenText, [displayWidth // 4, 0])
+    
+##    textPosition = screenText.get_rect()
+##    textPosition.centerx = gameDisplay.get_rect().centerx
+##    gameDisplay.blit(screenText, textPosition)
 
 # redraws the vehicle 
 def snake(leadX, leadY, blockSize):
@@ -71,7 +82,8 @@ def gameLoop():
     while not gameExit:
         while gameOver:
             # print instructions to continue and check for input
-            messageToScreen("Game over, press p to play to e to exit", red)
+            messageToScreen("Game over, press p to play to e to exit", red,
+                            score)
             pygame.draw.rect(gameDisplay, orange, [leadX, leadY, blockSize,
                                                   blockSize])
             pygame.display.update()
@@ -126,7 +138,7 @@ def gameLoop():
                 leadX <= obj.getX() + obj.getWidth()) and
                 leadY == obj.getY()):
                 gameOver = True
-            if obj.getY() + 10 == leadY:
+            if obj.getY() - 10 == leadY:
                 score += 1
         displayScore(score)
         counter += 1
