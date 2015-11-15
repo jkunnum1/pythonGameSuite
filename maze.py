@@ -10,6 +10,8 @@ white = (255, 255, 255) # set colors rgb
 black = (0,0, 0)
 red = (255, 0, 0)
 green = (0, 155, 0)
+orange = (255, 165, 0)
+teal = (32, 178, 170)
 
 displayWidth = 800
 displayHeight = 600
@@ -26,7 +28,7 @@ pygame.display.update()
 # frames per second and font
 clock = pygame.time.Clock()
 framePerSec = 15
-font = pygame.font.SysFont(None, 30)
+font = pygame.font.SysFont(None, 40)
 
 def displayScore(score):
     screenText = font.render(str(score), True, green)
@@ -35,11 +37,13 @@ def displayScore(score):
 # prints whatever message you give with color specified
 def messageToScreen(msg, color):
     screenText = font.render(msg, True, color)
-    gameDisplay.blit(screenText, [displayWidth / 2, displayHeight / 2])
+    textPosition = screenText.get_rect()
+    textPosition.centerx = gameDisplay.get_rect().centerx
+    gameDisplay.blit(screenText, textPosition)
 
 # redraws the vehicle 
 def snake(leadX, leadY, blockSize):
-    pygame.draw.rect(gameDisplay, green, [leadX, leadY, blockSize, blockSize])
+    pygame.draw.rect(gameDisplay, orange, [leadX, leadY, blockSize, blockSize])
 
 # adds a new barrier to the list
 def addBarrier(barriers):
@@ -60,8 +64,9 @@ def gameLoop():
     addBarrier(barriers)
     while not gameExit:
         while gameOver:
-            gameDisplay.fill(white)
             messageToScreen("Game over, press p to play to e to exit", red)
+            pygame.draw.rect(gameDisplay, orange, [leadX, leadY, blockSize,
+                                                  blockSize])
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
@@ -98,7 +103,7 @@ def gameLoop():
         # add changes to the x coordinate of the vehicle
         leadX += leadXChange
         # set background to white
-        gameDisplay.fill(white)
+        gameDisplay.fill(teal)
         snake(leadX, leadY, blockSize)
         # make rectangle (where, color, [coordinateX, coordinateY, width, height])
         for obj in barriers:
@@ -114,15 +119,15 @@ def gameLoop():
             if obj.getY() + 10 == leadY:
                 score += 1
         displayScore(score)
-        pygame.display.update()
         counter += 1
+        # check to see if it's time to add a new barrier
         if counter % 10 == 0:
+            counter = 0
             addBarrier(barriers)
-            pygame.display.update()
+        pygame.display.update()
 
         # sleep -> frames per second (lower number = slower)
         clock.tick(framePerSec)
-        
     
     # un-initializes and quits pygame
     pygame.quit()
