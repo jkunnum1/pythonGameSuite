@@ -1,6 +1,7 @@
 #tkinter
 import tkinter
 import registration
+import RegisterGUI
 
 class LoginGUI:
     def __init__(self, users):
@@ -72,7 +73,12 @@ class LoginGUI:
         return self.__users
 
     def __register(self):
-        self.__users = registration.register(self.__users)
+        newUser = RegisterGUI.RegisterGUI(self.__users)
+        userInfo = newUser.getInfo()
+        if userInfo[0] != False:
+            self.__users[userInfo[0]] = [userInfo[0], userInfo[1], userInfo[2],
+                                         userInfo[3], userInfo[4], userInfo[5]]
+        
 
 
 
