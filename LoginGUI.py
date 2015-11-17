@@ -1,5 +1,6 @@
 #tkinter
 import tkinter
+import pickle
 import registration
 import RegisterGUI
 
@@ -71,19 +72,17 @@ class LoginGUI:
     def getUsers(self):
         return self.__users
 
-    def __register(self):
+    def __startGUI(self):
         self.__newUser = RegisterGUI.RegisterGUI(self.__users)
+
+    def __register(self):
+        self.__startGUI()
+        self.__update()
 
     def __update(self):
         print("getting info")
-        userInfo = self.__newUser.getInfo()
-        print("gotem")
-        print(userInfo)
-        if userInfo[0] != False:
-            self.__users[userInfo[0]] = [userInfo[0], userInfo[1], userInfo[2],
-                                         userInfo[3], userInfo[4], userInfo[5]]
-
-
+        self.__users = pickle.load(open("users.dat", "rb"))
+        print("GOTEMM")
 
 
 

@@ -1,6 +1,7 @@
 # Registration
 
 import tkinter
+import pickle
 from tkinter import *
 import verification
 
@@ -166,6 +167,9 @@ class RegisterGUI:
         if valid:
             self.__info = [user, password, firstName,
                            lastName, email, age]
+            self.__users[user] = self.__info
+            print(self.__users)
+            pickle.dump(self.__users, open("users.dat", "wb"))
         
 
     def __cancel(self):
