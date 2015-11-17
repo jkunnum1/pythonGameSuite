@@ -2,6 +2,7 @@
 
 import tkinter
 from tkinter import *
+import verification
 
 class RegisterGUI:
     def __init__(self, users):
@@ -9,7 +10,6 @@ class RegisterGUI:
         self.__mainWindow = tkinter.Tk()
         self.__mainWindow.wm_title("Register")
 
-        self.__registered = False
         self.__userFrame = tkinter.Frame(self.__mainWindow)
         self.__passFrame = tkinter.Frame(self.__mainWindow)
         self.__confirmPassFrame = tkinter.Frame(self.__mainWindow)
@@ -22,19 +22,16 @@ class RegisterGUI:
         # (Attribute) : input : status
         self.__userLabel = tkinter.Label(self.__userFrame, text="Username:")
         self.__userEntry = tkinter.Entry(self.__userFrame, width=10)
-        self.__userStatus = tkinter.StringVar()
-        self.__userStatusLabel = tkinter.Label(self.__userFrame,
-                                               textvariable=self.__userStatus)
+        self.__userStatusLabel = tkinter.Label(self.__userFrame, text = '')
         # grid Widgets:
-        self.__userLabel.grid(row=0, column=0, sticky=W)
+        self.__userLabel.grid(row=0, column=0)
         self.__userEntry.grid(row=0, column=1)
-        self.__userStatusLabel.grid(row=0, column=3)
+        self.__userStatusLabel.grid(row=0, column=2)
         # Create Password Widgets:
         self.__passLabel = tkinter.Label(self.__passFrame, text="Password:")
         self.__passEntry = tkinter.Entry(self.__passFrame, width=10)
-        self.__passStatus = tkinter.StringVar()
-        self.__passStatusLabel = tkinter.Label(self.__passFrame,
-                                               textvariable=self.__passStatus)
+        self.__passStatusLabel = tkinter.Label(self.__passFrame, text='')
+
         # Configure Password Entry Widget:
         self.__passEntry.config(show='*')
         # grid Widgets:
@@ -47,9 +44,8 @@ class RegisterGUI:
                                                 text="Confirm:")
         self.__confirmPassEntry = tkinter.Entry(self.__confirmPassFrame,
                                                 width=10)
-        self.__confirmPassStatus = tkinter.StringVar()
         self.__confirmPassStatusLabel = tkinter.Label(self.__confirmPassFrame,
-                                                      textvariable=self.__confirmPassStatus)
+                                                      text='')
         # Configure Password Entry Widget:
         self.__confirmPassEntry.config(show='*')
         # grid Widgets:
@@ -62,9 +58,7 @@ class RegisterGUI:
                                               text="First Name:")
         self.__firstNameEntry = tkinter.Entry(self.__firstNameFrame,
                                               width=10)
-        self.__firstNameStatus = tkinter.StringVar()
-        self.__firstNameStatusLabel = tkinter.Label(self.__firstNameFrame,
-                                                    textvariable=self.__firstNameStatus)
+        self.__firstNameStatusLabel = tkinter.Label(self.__firstNameFrame, text='')
         # grid Widgets:
         self.__firstNameLabel.grid(row=3, column=0)
         self.__firstNameEntry.grid(row=3, column=1)
@@ -75,9 +69,7 @@ class RegisterGUI:
                                               text="Last Name:")
         self.__lastNameEntry = tkinter.Entry(self.__lastNameFrame,
                                               width=10)
-        self.__lastNameStatus = tkinter.StringVar()
-        self.__lastNameStatusLabel = tkinter.Label(self.__lastNameFrame,
-                                                    textvariable=self.__lastNameStatus)
+        self.__lastNameStatusLabel = tkinter.Label(self.__lastNameFrame, text='')
         # grid Widgets:
         self.__lastNameLabel.grid(row=4, column=0)
         self.__lastNameEntry.grid(row=4, column=1)
@@ -88,9 +80,7 @@ class RegisterGUI:
                                               text="Email:")
         self.__emailEntry = tkinter.Entry(self.__emailFrame,
                                               width=20)
-        self.__emailStatus = tkinter.StringVar()
-        self.__emailStatusLabel = tkinter.Label(self.__emailFrame,
-                                                    textvariable=self.__emailStatus)
+        self.__emailStatusLabel = tkinter.Label(self.__emailFrame, text='')
         # grid Widgets:
         self.__emailLabel.grid(row=5, column=0)
         self.__emailEntry.grid(row=5, column=1)
@@ -101,9 +91,7 @@ class RegisterGUI:
                                               text="Age:")
         self.__ageEntry = tkinter.Entry(self.__ageFrame,
                                               width=10)
-        self.__ageStatus = tkinter.StringVar()
-        self.__ageStatusLabel = tkinter.Label(self.__ageFrame,
-                                                    textvariable=self.__ageStatus)
+        self.__ageStatusLabel = tkinter.Label(self.__ageFrame, text='')
         # grid Widgets:
         self.__ageLabel.grid(row=6, column=0)
         self.__ageEntry.grid(row=6, column=1)
@@ -131,8 +119,54 @@ class RegisterGUI:
         # Start the main loop
         tkinter.mainloop()
 
+    def __getStati(self):
+        results = self.__info
+        if not results[0]:
+            self.__userStatusLabel.config(text="Invalid username!")
+            self.__registered = False
+        if not results[1]:
+            self.__confirmPassStatusLabel.config(text="Invalid password/passwords don't match!")
+            self.__registered = False
+        if not results[2]:
+            self.__firstNameStatusLabel.config(text="First name cannot be blank!")
+            self.__registered = False
+        if not results[3]:
+            self.__lastNameStatusLabel.config(text="Last name cannot be blank!")
+            self.__registered = False
+        if not results[4]:
+            self.__emailStatusLabel.config(text="Invalid email!")
+            self.__registered = False
+        if not results[5]:
+            self.__ageStatusLabel.config(text="Invalid age!")
+            self.__registered = False
+        if False not in results:
+            self.__mainWindow.destroy()
+        return results[0] and results[1] and results[2] and results[3] and \
+               results[4] and results[5]
+        
+
     def __process(self):
-        print("hi")
+        self.__userStatusLabel.config(text='')
+        self.__confirmPassStatusLabel.config(text='')
+        self.__firstNameStatusLabel.config(text='')
+        self.__lastNameStatusLabel.config(text='')
+        self.__emailStatusLabel.config(text='')
+        self.__ageStatusLabel.config(text='')
+        user = self.__userEntry.get()
+        password = self.__passEntry.get()
+        confirmPassword = self.__confirmPassEntry.get()
+        firstName = self.__firstNameEntry.get()
+        lastName = self.__lastNameEntry.get()
+        email = self.__emailEntry.get()
+        age = self.__ageEntry.get()
+        self.__info = verification.verify([user, password, confirmPassword,
+                                           firstName, lastName, email, age],
+                                          self.__users)
+        valid = self.__getStati()
+        if valid:
+            self.__info = [user, password, firstName,
+                           lastName, email, age]
+        
 
     def __cancel(self):
         self.__registered = False
@@ -142,7 +176,4 @@ class RegisterGUI:
         if not self.__registered:
             return [False]
         else:
-            self.__info = [self.__userEntry.get(), self.__passEntry.get(),
-                    self.__firstNameEntry.get(), self.lastNameEntry.get(),
-                    self.__emailEntry.get(), self.__ageEntry.get()]
             return self.__info

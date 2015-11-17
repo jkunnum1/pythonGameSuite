@@ -8,7 +8,7 @@ def login():
     credentials = LoginGUI.LoginGUI(users)
     try:
         username = credentials.getUsername()
-        users = credentials.getUsers()
+        #users = credentials.getUsers()
         # To save in case a new user was added, we will pickle our updated
         # users dictionary
         pickle.dump(users, open("users.dat", "wb"))

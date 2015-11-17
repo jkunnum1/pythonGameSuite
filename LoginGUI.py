@@ -59,7 +59,6 @@ class LoginGUI:
         self.__password = self.__passEntry.get()
         if self.__username in self.__users:
             if self.__password == self.__users[self.__username][1]:
-                #self.__user = self.__users[self.__username]
                 self.__mainWindow.destroy()
             else:
                 self.__result.set("Incorrect Username/Password!")
@@ -73,12 +72,16 @@ class LoginGUI:
         return self.__users
 
     def __register(self):
-        newUser = RegisterGUI.RegisterGUI(self.__users)
-        userInfo = newUser.getInfo()
+        self.__newUser = RegisterGUI.RegisterGUI(self.__users)
+
+    def __update(self):
+        print("getting info")
+        userInfo = self.__newUser.getInfo()
+        print("gotem")
+        print(userInfo)
         if userInfo[0] != False:
             self.__users[userInfo[0]] = [userInfo[0], userInfo[1], userInfo[2],
                                          userInfo[3], userInfo[4], userInfo[5]]
-        
 
 
 
