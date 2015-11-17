@@ -5,4 +5,4 @@ This is a pygame suite where users can accumulate points by playing games such a
 
 First game: Maze Flyer
 
-Second game: ...
+Second game: Hangman!
