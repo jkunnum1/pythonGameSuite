@@ -37,12 +37,9 @@ game you would like to play!")
     #The game will start
     def openMazeGame(self):
         tkinter.messagebox.showinfo(message = "Play maze game")
-        import mazeGame
+        import maze
 
     #Same as above but with Hang man
     def openHangMan(self):
         tkinter.messagebox.showinfo(message = "Play Hang man")
-        import hangMan
-
-
-my_GUI = MyGUI()
+        from Hangman import hangman

@@ -2,6 +2,7 @@
 
 import pickle
 import LoginGUI
+import MainMenuGUI
 
 def login():
     users = pickle.load(open("users.dat", "rb"))
@@ -13,6 +14,10 @@ def login():
             # users dictionary
             user = users[username]
             pickle.dump(user, open("userOnline.dat", "wb"))
+            menu = MainMenuGUI.MyGUI()
+            userOnline = []
+            pickle.dump(userOnline, open("userOnline.dat", "wb"))
+            
     except:
         print("Unexpected Hault!")
 

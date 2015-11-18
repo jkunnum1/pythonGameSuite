@@ -12,7 +12,7 @@ displayWidth = 800
 displayHeight = 600
 gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
 pygame.display.set_caption("Hangman!")
-icon = pygame.image.load("hangman32.png")
+icon = pygame.image.load("Hangman/hangman32.png")
 pygame.display.set_icon(icon)
 clock = pygame.time.Clock()
 FPS = 30
@@ -86,7 +86,7 @@ def gameEnd():
 
 
 def gameOver():
-    image6 = pygame.image.load("hangman1006.png")
+    image6 = pygame.image.load("Hangman/hangman1006.png")
     intro = True
     while intro:
 
@@ -110,13 +110,13 @@ def gameOver():
         clock.tick(4)
 
 def score(points, strikes, length, exportGuesses=[['', [0, 1]], ['', [2, 3]]], guessList=[]):
-    image0 = pygame.image.load("hangman1000.png")
-    image1 = pygame.image.load("hangman1001.png")
-    image2 = pygame.image.load("hangman1002.png")
-    image3 = pygame.image.load("hangman1003.png")
-    image4 = pygame.image.load("hangman1004.png")
-    image5 = pygame.image.load("hangman1005.png")
-    image6 = pygame.image.load("hangman1006.png")
+    image0 = pygame.image.load("Hangman/hangman1000.png")
+    image1 = pygame.image.load("Hangman/hangman1001.png")
+    image2 = pygame.image.load("Hangman/hangman1002.png")
+    image3 = pygame.image.load("Hangman/hangman1003.png")
+    image4 = pygame.image.load("Hangman/hangman1004.png")
+    image5 = pygame.image.load("Hangman/hangman1005.png")
+    image6 = pygame.image.load("Hangman/hangman1006.png")
     gameDisplay.fill(white)
     pointsDisplay = smallFont.render("Score: " + str(points), True, black)
     strikesDisplay = smallFont.render("Strikes: " + str(strikes) + "/6", True, black)
