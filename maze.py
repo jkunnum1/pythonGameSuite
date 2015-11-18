@@ -8,7 +8,6 @@ pygame.init()
 ############################
 '''LOAD ONLINE USER'''
 user = pickle.load(open("userOnline.dat", "rb"))
-print("get scores")
 highScores = pickle.load(open("mazeScores.dat", "rb"))
 ############################
 

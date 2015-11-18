@@ -80,9 +80,7 @@ class LoginGUI:
         self.__update()
 
     def __update(self):
-        print("getting info")
         self.__users = pickle.load(open("users.dat", "rb"))
-        print("GOTEMM")
 
 
 

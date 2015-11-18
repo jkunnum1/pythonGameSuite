@@ -168,7 +168,6 @@ class RegisterGUI:
             self.__info = [user, password, firstName,
                            lastName, email, age, 0]
             self.__users[user] = self.__info
-            print(self.__users)
             pickle.dump(self.__users, open("users.dat", "wb"))
         
 
