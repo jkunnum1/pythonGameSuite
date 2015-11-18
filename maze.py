@@ -1,11 +1,25 @@
 import pygame
 import time
 import Barriers
+import pickle
 
 pygame.init()
 
-# append score each time there is a game over
-totalScore = [0]
+############################
+'''LOAD ONLINE USER'''
+user = pickle.load(open("userOnline.dat", "rb"))
+print("get scores")
+highScores = pickle.load(open("mazeScores.dat", "rb"))
+############################
+
+#  append score each time there is a game over  #
+### LOAD HIGHSCORE TO TOTAL SCORE TO BE SHOWN ###
+try:
+    totalScore = [highScores[user[0]], 0]
+except KeyError:
+    # User is new, so key above wont work
+    highScores[user[0]] = 0
+    totalScore = [0]
 # set colors rgb
 white = (255, 255, 255) 
 black = (0,0, 0)
@@ -49,6 +63,10 @@ def displayScore(score):
 def messageToScreen(msg, color, score):
     if score > max(totalScore):
         msg2 = "You have a new high of " + str(score)
+        ###### SAVE HIGH SCORE ######
+        highScores[user[0]] = score
+        pickle.dump(highScores, open("mazeScores.dat", "wb"))
+        #############################
         screenText = font.render(msg2, True, color)
         gameDisplay.blit(screenText, [displayWidth // 4, 40])
     screenText = font.render(msg, True, color)
