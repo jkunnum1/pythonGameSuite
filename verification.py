@@ -35,7 +35,7 @@ def emailVerify(rawEmail):
     return valid
 
 def verify(info, users):
-    if info[0] in users:
+    if info[0] in users or info[0] == '':
         validUser = False
     else:
         validUser = True

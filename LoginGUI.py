@@ -61,13 +61,19 @@ class LoginGUI:
         if self.__username in self.__users:
             if self.__password == self.__users[self.__username][1]:
                 self.__mainWindow.destroy()
+                self.__valid = True
             else:
                 self.__result.set("Incorrect Username/Password!")
+                self.__valid = False
         else:
-            self.__result.set("Incorrect Username/Password!")       
+            self.__result.set("Incorrect Username/Password!")
+            self.__valid = False
 
     def getUsername(self):
-        return self.__username
+        if self.__valid:
+            return self.__username
+        else:
+            return ''
 
     def getUsers(self):
         return self.__users
