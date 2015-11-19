@@ -36,11 +36,9 @@ game you would like to play!")
     #When maze game button is hit, it will open a window, when user hits 'ok'
     #The game will start
     def openMazeGame(self):
-        tkinter.messagebox.showinfo(message = "Play maze game")
         import maze
 
     #Same as above but with Hang man
     def openHangMan(self):
-        tkinter.messagebox.showinfo(message = "Play Hang man")
         from Hangman import hangman
 
