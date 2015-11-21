@@ -1,14 +1,14 @@
 import pygame
 import time
-import NewBarrier
+from mazeGames import NewBarrier
 
 pygame.init()
 
 # append score each time there is a game over
 totalScore = [0]
 # set colors rgb
-white = (255, 255, 255) 
-black = (0,0, 0)
+white = (255, 255, 255)
+black = (0, 0, 0)
 red = (255, 0, 0)
 green = (0, 155, 0)
 orange = (255, 165, 0)
@@ -25,8 +25,8 @@ gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
 # set title of the game
 pygame.display.set_caption('Mazerunner')
 # set background
-backgroundImage = pygame.image.load("mazeBackground.png").convert()
-gameDisplay.blit(backgroundImage, [0,0])
+backgroundImage = pygame.image.load("mazeGames/mazeBackground.png").convert()
+gameDisplay.blit(backgroundImage, [0, 0])
 
 # updates the surface
 pygame.display.update()
@@ -36,14 +36,16 @@ clock = pygame.time.Clock()
 framePerSec = 15
 font = pygame.font.SysFont(None, 40)
 
+
 def displayScore(score):
     # display high score and current score
     msg = "H: " + str(max(totalScore))
-    screenText = font.render(msg, True, orange)
+    screenText = font.render(msg, True, black)
     gameDisplay.blit(screenText, [10, 10])
     msg = "C: " + str(score)
-    screenText = font.render(msg, True, orange)
+    screenText = font.render(msg, True, black)
     gameDisplay.blit(screenText, [10, 40])
+
 
 # prints whatever message you give with color specified
 def messageToScreen(msg, color, score):
@@ -53,39 +55,45 @@ def messageToScreen(msg, color, score):
         gameDisplay.blit(screenText, [displayWidth // 4, 40])
     screenText = font.render(msg, True, color)
     gameDisplay.blit(screenText, [displayWidth // 4, 0])
-    
+
 ##    textPosition = screenText.get_rect()
 ##    textPosition.centerx = gameDisplay.get_rect().centerx
 ##    gameDisplay.blit(screenText, textPosition)
 
-# redraws the vehicle 
+
+# redraws the vehicle
 def mazeVehicle(leadX, leadY, blockSize):
-    pygame.draw.rect(gameDisplay, green, [leadX, leadY, blockSize, blockSize])
+    pygame.draw.rect(gameDisplay, black, [leadX, leadY, blockSize, blockSize])
+
 
 # adds a new barrier to the list
-def addBarrier(barriers, leadX = 0):
+def addBarrier(barriers, leadX=0, move=20):
     if len(barriers) == 0:
-        barrier = NewBarrier.NewBarrier(displayWidth, displayHeight, blockSize,
-                                        leadX)
+        barrier = NewBarrier.NewBarrier(displayWidth, displayHeight,
+                                        blockSize, leadX, move, True)
     else:
         xPosition = barriers[-1].getX()
-        barrier = NewBarrier.NewBarrier(displayWidth, displayHeight, blockSize,
-                                        xPosition)
-        
+        barrier = NewBarrier.NewBarrier(displayWidth, displayHeight,
+                                        blockSize, xPosition, move)
+
     barriers.append(barrier)
     if barriers[0].getY() > displayHeight:
         del barriers[0]
+
 
 def gameLoop():
     gameExit = False
     gameOver = False
     leadX = displayWidth / 2
-    leadY = displayHeight / 2
+    leadY = displayHeight // 1.5
+    # start with counter at 0 so that counter % 20 is not 0
+    counter = 2
     leadXChange = 0
     score = 0
     barriers = []
     addBarrier(barriers, leadX)
-    
+    difficulty = 20
+
     while not gameExit:
         # for every time that there is an event
         for event in pygame.event.get():
@@ -102,33 +110,53 @@ def gameLoop():
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     leadXChange = 0
         # check that the vehicle is still on the screen
-        if leadX >= displayWidth or leadX < 0 or leadY >= displayHeight or leadY < 0:
+        if ((leadX >= displayWidth or leadX < 0) or (leadY >= displayHeight or
+                                                     leadY < 0)):
             gameOver = True
 
         # add changes to the x coordinate of the vehicle
         leadX += leadXChange
-        gameDisplay.blit(backgroundImage, [0,0])
-        mazeVehicle(leadX, leadY, blockSize)
-        # make rectangle (where, color, [coordinateX, coordinateY, width, height])
+        gameDisplay.blit(backgroundImage, [0, 0])
+        # make rectangle (where, color, [coordinateX, coordinateY, width,
+        # height])
         for obj in barriers:
             obj.moveY()
             pygame.draw.rect(gameDisplay, orange, [obj.getX(),
-                                                  obj.getY(),
-                                                  obj.getWidth(), blockSize])
-            # check to see if there is a collision, else add point to score
-            if ((leadX >= obj.getX() and
-                leadX <= obj.getX() + obj.getWidth()) and
-                leadY == obj.getY()):
+                                                   obj.getY(),
+                                                   obj.getWidth(),
+                                                   obj.getHeight()])
+            # check to see that the vehicle is still on the path
+            if ((leadY >= obj.getY() and leadY < obj.getY() +
+                 obj.getHeight()) and (leadX < obj.getX() or
+                                       leadX > obj.getX() + obj.getWidth())):
                 gameOver = True
-            if obj.getY() - 10 == leadY:
-                score += 1
+            # if the user passes this object then add, to the counter
+            if not gameOver:
+                counter += 1
+        # add the next zone
+        addBarrier(barriers, 0, difficulty)
+        mazeVehicle(leadX, leadY, blockSize)
+        # increment score
+        if counter % 20 == 0:
+            score += 1
+            counter = 0
+            # check to see if it is time to increment difficulty
+            if score > 60:
+                difficulty = 30
+            elif score > 40:
+                difficulty = 25
+            elif score > 20:
+                difficulty = 20
+            else:
+                difficulty = 15
+            #######################################
         displayScore(score)
 
         while gameOver:
             # print instructions to continue and check for input
             messageToScreen("Game over, press p to play to e to exit", red,
                             score)
-            pygame.draw.rect(gameDisplay, orange, [leadX, leadY, blockSize,
+            pygame.draw.rect(gameDisplay, black, [leadX, leadY, blockSize,
                                                   blockSize])
             pygame.display.update()
             for event in pygame.event.get():
@@ -144,20 +172,19 @@ def gameLoop():
                         gameOver = False
                         gameExit = False
                         leadX = displayWidth / 2
-                        leadY = displayHeight / 2
+                        leadY = displayHeight // 1.5
                         leadXChange = 0
                         totalScore.append(score)
                         score = 0
+                        difficulty = 20
                         barriers = []
                         addBarrier(barriers, leadX)
-                        
-        # add the next zone
-        addBarrier(barriers)
+
         pygame.display.update()
 
         # sleep -> frames per second (lower number = slower)
         clock.tick(framePerSec)
-    
+
     # un-initializes and quits pygame
     pygame.quit()
     quit()

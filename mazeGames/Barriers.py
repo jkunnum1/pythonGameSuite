@@ -6,9 +6,9 @@ class Barriers:
         # on the left side of the screen
         self.__randX = round(random.randrange(-50, displayWidth) / 10.0) * 10.0
         self.__randWidth = round(random.randrange(displayWidth // 4,
-                                                  displayWidth // 2) / 10.0) * 10.0
+                                                  displayWidth // 3) / 10.0) * 10.0
         if self.__randX + self.__randWidth > displayWidth:
-            self.__randWidth = displayWidth - self.__randX
+            self.__randX = displayWidth - self.__randWidth
         self.__randY = 10
         
 
