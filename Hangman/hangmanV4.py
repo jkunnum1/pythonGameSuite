@@ -129,245 +129,39 @@ def score(points, strikes, length, exportGuesses=[['', [0, 1]], ['', [2, 3]]], g
     elif strikes == 6:
         gameDisplay.blit(image6, [300, 150])
 
+    guessPositionList = [[30, 300], [85, 300], [140, 300], [30, 350], [85, 350], [140, 350]]
+    for index in range(len(guessList)):
+        letter = medFont.render(guessList[index], True, black)
+        gameDisplay.blit(letter, guessPositionList[index])
+        pygame.display.update()
+            
 
-    for letter in guessList:
-        if guessList[0] == letter:
-            letter = medFont.render(letter, True, black)
-            gameDisplay.blit(letter, [30, 300])
-            pygame.display.update()
-        elif guessList[1] == letter:
-            letter = medFont.render(",  " + letter, True, black)
-            gameDisplay.blit(letter, [60, 300])
-            pygame.display.update()
-        elif guessList[2] == letter:
-            letter = medFont.render(",  " + letter, True, black)
-            gameDisplay.blit(letter, [140, 300])
-            pygame.display.update()
-        elif guessList[3] == letter:
-            letter = medFont.render(letter, True, black)
-            gameDisplay.blit(letter, [30, 350])
-            pygame.display.update()
-        elif guessList[4] == letter:
-            letter = medFont.render(",  " + letter, True, black)
-            gameDisplay.blit(letter, [60, 350])
-            pygame.display.update()
-        else:
-            letter = medFont.render(",  " + letter, True, black)
-            gameDisplay.blit(letter, [140, 350])
-            pygame.display.update()
-
-    if length == 3:
-        pygame.draw.line(gameDisplay, black, (300, 100), (350, 100), 4)
-        pygame.draw.line(gameDisplay, black, (380, 100), (430, 100), 4)
-        pygame.draw.line(gameDisplay, black, (460, 100), (510, 100), 4)
-
-        for sequence in exportGuesses:
-            letter = sequence[0]
-            letter1 = medFont.render(letter, True, black)
-            for idx in sequence[1]:
-                if idx == 0:
-                    gameDisplay.blit(letter1, [310, 30])
-                elif idx == 1:
-                    gameDisplay.blit(letter1, [390, 30])
-                else:
-                    gameDisplay.blit(letter1, [470, 30])
-
-    elif length == 4:
-        pygame.draw.line(gameDisplay, black, (260, 100), (310, 100), 4)
-        pygame.draw.line(gameDisplay, black, (340, 100), (390, 100), 4)
-        pygame.draw.line(gameDisplay, black, (420, 100), (470, 100), 4)
-        pygame.draw.line(gameDisplay, black, (500, 100), (550, 100), 4)
-
-        for sequence in exportGuesses:
-            letter = sequence[0]
-            letter1 = medFont.render(letter, True, black)
-            for idx in sequence[1]:
-                if idx == 0:
-                    gameDisplay.blit(letter1, [270, 30])
-                elif idx == 1:
-                    gameDisplay.blit(letter1, [350, 30])
-                elif idx == 2:
-                    gameDisplay.blit(letter1, [430, 30])
-                else:
-                    gameDisplay.blit(letter1, [510, 30])
-
-    elif length == 5:
-        pygame.draw.line(gameDisplay, black, (220, 100), (270, 100), 4)
-        pygame.draw.line(gameDisplay, black, (300, 100), (350, 100), 4)
-        pygame.draw.line(gameDisplay, black, (380, 100), (430, 100), 4)
-        pygame.draw.line(gameDisplay, black, (460, 100), (510, 100), 4)
-        pygame.draw.line(gameDisplay, black, (540, 100), (590, 100), 4)
-
-        for sequence in exportGuesses:
-            letter = sequence[0]
-            letter1 = medFont.render(letter, True, black)
-            for idx in sequence[1]:
-                if idx == 0:
-                    gameDisplay.blit(letter1, [230, 30])
-                elif idx == 1:
-                    gameDisplay.blit(letter1, [310, 30])
-                elif idx == 2:
-                    gameDisplay.blit(letter1, [390, 30])
-                elif idx == 3:
-                    gameDisplay.blit(letter1, [470, 30])
-                else:
-                    gameDisplay.blit(letter1, [550, 30])
-
-    elif length == 6:
-        pygame.draw.line(gameDisplay, black, (180, 100), (230, 100), 4)
-        pygame.draw.line(gameDisplay, black, (260, 100), (310, 100), 4)
-        pygame.draw.line(gameDisplay, black, (340, 100), (390, 100), 4)
-        pygame.draw.line(gameDisplay, black, (420, 100), (470, 100), 4)
-        pygame.draw.line(gameDisplay, black, (500, 100), (550, 100), 4)
-        pygame.draw.line(gameDisplay, black, (580, 100), (630, 100), 4)
-
-        for sequence in exportGuesses:
-            letter = sequence[0]
-            letter1 = medFont.render(letter, True, black)
-            for idx in sequence[1]:
-                if idx == 0:
-                    gameDisplay.blit(letter1, [190, 30])
-                elif idx == 1:
-                    gameDisplay.blit(letter1, [270, 30])
-                elif idx == 2:
-                    gameDisplay.blit(letter1, [350, 30])
-                elif idx == 3:
-                    gameDisplay.blit(letter1, [430, 30])
-                elif idx == 4:
-                    gameDisplay.blit(letter1, [510, 30])
-                else:
-                    gameDisplay.blit(letter1, [590, 30])
-
-    elif length == 7:
-        pygame.draw.line(gameDisplay, black, (140, 100), (190, 100), 4)
-        pygame.draw.line(gameDisplay, black, (220, 100), (270, 100), 4)
-        pygame.draw.line(gameDisplay, black, (300, 100), (350, 100), 4)
-        pygame.draw.line(gameDisplay, black, (380, 100), (430, 100), 4)
-        pygame.draw.line(gameDisplay, black, (460, 100), (510, 100), 4)
-        pygame.draw.line(gameDisplay, black, (540, 100), (590, 100), 4)
-        pygame.draw.line(gameDisplay, black, (620, 100), (670, 100), 4)
-
-        for sequence in exportGuesses:
-            letter = sequence[0]
-            letter1 = medFont.render(letter, True, black)
-            for idx in sequence[1]:
-                if idx == 0:
-                    gameDisplay.blit(letter1, [150, 30])
-                elif idx == 1:
-                    gameDisplay.blit(letter1, [230, 30])
-                elif idx == 2:
-                    gameDisplay.blit(letter1, [310, 30])
-                elif idx == 3:
-                    gameDisplay.blit(letter1, [390, 30])
-                elif idx == 4:
-                    gameDisplay.blit(letter1, [470, 30])
-                elif idx == 5:
-                    gameDisplay.blit(letter1, [550, 30])
-                else:
-                    gameDisplay.blit(letter1, [630, 30])
-
-    elif length == 8:
-        pygame.draw.line(gameDisplay, black, (100, 100), (150, 100), 4)
-        pygame.draw.line(gameDisplay, black, (180, 100), (230, 100), 4)
-        pygame.draw.line(gameDisplay, black, (260, 100), (310, 100), 4)
-        pygame.draw.line(gameDisplay, black, (340, 100), (390, 100), 4)
-        pygame.draw.line(gameDisplay, black, (420, 100), (470, 100), 4)
-        pygame.draw.line(gameDisplay, black, (500, 100), (550, 100), 4)
-        pygame.draw.line(gameDisplay, black, (580, 100), (630, 100), 4)
-        pygame.draw.line(gameDisplay, black, (660, 100), (710, 100), 4)
-
-        for sequence in exportGuesses:
-            letter = sequence[0]
-            letter1 = medFont.render(letter, True, black)
-            for idx in sequence[1]:
-                if idx == 0:
-                    gameDisplay.blit(letter1, [110, 30])
-                elif idx == 1:
-                    gameDisplay.blit(letter1, [190, 30])
-                elif idx == 2:
-                    gameDisplay.blit(letter1, [270, 30])
-                elif idx == 3:
-                    gameDisplay.blit(letter1, [350, 30])
-                elif idx == 4:
-                    gameDisplay.blit(letter1, [430, 30])
-                elif idx == 5:
-                    gameDisplay.blit(letter1, [510, 30])
-                elif idx == 6:
-                    gameDisplay.blit(letter1, [590, 30])
-                else:
-                    gameDisplay.blit(letter1, [670, 30])
-
-    elif length == 9:
-        pygame.draw.line(gameDisplay, black, (60, 100), (110, 100), 4)
-        pygame.draw.line(gameDisplay, black, (140, 100), (190, 100), 4)
-        pygame.draw.line(gameDisplay, black, (220, 100), (270, 100), 4)
-        pygame.draw.line(gameDisplay, black, (300, 100), (350, 100), 4)
-        pygame.draw.line(gameDisplay, black, (380, 100), (430, 100), 4)
-        pygame.draw.line(gameDisplay, black, (460, 100), (510, 100), 4)
-        pygame.draw.line(gameDisplay, black, (540, 100), (590, 100), 4)
-        pygame.draw.line(gameDisplay, black, (620, 100), (670, 100), 4)
-        pygame.draw.line(gameDisplay, black, (700, 100), (750, 100), 4)
-
-        for sequence in exportGuesses:
-            letter = sequence[0]
-            letter1 = medFont.render(letter, True, black)
-            for idx in sequence[1]:
-                    if idx == 0:
-                        gameDisplay.blit(letter1, [70, 30])
-                    elif idx == 1:
-                        gameDisplay.blit(letter1, [150, 30])
-                    elif idx == 2:
-                        gameDisplay.blit(letter1, [230, 30])
-                    elif idx == 3:
-                        gameDisplay.blit(letter1, [310, 30])
-                    elif idx == 4:
-                        gameDisplay.blit(letter1, [390, 30])
-                    elif idx == 5:
-                        gameDisplay.blit(letter1, [470, 30])
-                    elif idx == 6:
-                        gameDisplay.blit(letter1, [550, 30])
-                    elif idx == 7:
-                        gameDisplay.blit(letter1, [630, 30])
-                    else:
-                        gameDisplay.blit(letter1, [710, 30])
-
+    # list of lists for the location of the lines
+    positionList = []
+    if length % 2 != 0:
+        ctr = (9 - length) // 2
+        positionList.append([(60 + (80 * ctr), 100), (110 + (80 * ctr), 100)])
+        for location in range(length - 1):
+            positionList.append([(positionList[-1][0][0] + 80, 100), (positionList[-1][0][0] + 130, 100)])
     else:
-        pygame.draw.line(gameDisplay, black, (20, 100), (70, 100), 4)
-        pygame.draw.line(gameDisplay, black, (100, 100), (150, 100), 4)
-        pygame.draw.line(gameDisplay, black, (180, 100), (230, 100), 4)
-        pygame.draw.line(gameDisplay, black, (260, 100), (310, 100), 4)
-        pygame.draw.line(gameDisplay, black, (340, 100), (390, 100), 4)
-        pygame.draw.line(gameDisplay, black, (420, 100), (470, 100), 4)
-        pygame.draw.line(gameDisplay, black, (500, 100), (550, 100), 4)
-        pygame.draw.line(gameDisplay, black, (580, 100), (630, 100), 4)
-        pygame.draw.line(gameDisplay, black, (660, 100), (710, 100), 4)
-        pygame.draw.line(gameDisplay, black, (740, 100), (790, 100), 4)
+        ctr = (10 - length) // 2
+        positionList.append([(20 + (80 * ctr), 100), (70 + (80 * ctr), 100)])
+        for location in range(length - 1):
+            positionList.append([(positionList[-1][0][0] + 80, 100), (positionList[-1][0][0] + 130, 100)])
+    # print(positionList)
 
-        for sequence in exportGuesses:
+    # draw the lines
+    for position in positionList:
+        pygame.draw.line(gameDisplay, black, position[0], position[1], 4)
+
+
+    ###### putting the letters in place
+    for sequence in exportGuesses:
             letter = sequence[0]
             letter1 = medFont.render(letter, True, black)
             for idx in sequence[1]:
-                if idx == 0:
-                    gameDisplay.blit(letter1, [30, 30])
-                elif idx == 1:
-                    gameDisplay.blit(letter1, [110, 30])
-                elif idx == 2:
-                    gameDisplay.blit(letter1, [190, 30])
-                elif idx == 3:
-                    gameDisplay.blit(letter1, [270, 30])
-                elif idx == 4:
-                    gameDisplay.blit(letter1, [350, 30])
-                elif idx == 5:
-                    gameDisplay.blit(letter1, [430, 30])
-                elif idx == 6:
-                    gameDisplay.blit(letter1, [510, 30])
-                elif idx == 7:
-                    gameDisplay.blit(letter1, [590, 30])
-                elif idx == 8:
-                    gameDisplay.blit(letter1, [670, 30])
-                else:
-                    gameDisplay.blit(letter1, [670, 30])
-
+                gameDisplay.blit(letter1, [positionList[idx][0][0] + 10, 30])
+                    
     pygame.display.update()
 
 
