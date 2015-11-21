@@ -7,6 +7,7 @@ pygame.init()
 
 white = (255, 255, 255)
 black = (0, 0, 0)
+red = (255, 0, 0)
 
 displayWidth = 800
 displayHeight = 600
@@ -76,11 +77,13 @@ def gameEnd():
                 elif event.key == pygame.K_q:
                     return(True)
 
-        gameDisplay.fill(white)
-        text = largeFont.render("Nice Job!", True, black)
+        #gameDisplay.fill(white)
+        text = largeFont.render("Nice", True, red)
+        text3 = largeFont.render("Job!", True, red)
         text2 = smallFont.render("C for play, Q for quit", True, black)
-        gameDisplay.blit(text, (200, 200))
-        gameDisplay.blit(text2, (250, 400))
+        gameDisplay.blit(text, (550, 150))
+        gameDisplay.blit(text3, (550, 250))
+        gameDisplay.blit(text2, (550, 400))
         pygame.display.update()
         clock.tick(4)
 
@@ -100,12 +103,14 @@ def gameOver():
                 elif event.key == pygame.K_q:
                     return(True)
 
-        gameDisplay.fill(white)
-        text = largeFont.render("Game Over", True, black)
+        #gameDisplay.fill(white)
+        text = largeFont.render("Game", True, red)
+        text3 = largeFont.render("Over", True, red)
         text2 = smallFont.render("C for play, Q for quit", True, black)
-        gameDisplay.blit(image6, [300, 150])
-        gameDisplay.blit(text, (300, 200))
-        gameDisplay.blit(text2, (300, 400))
+        #gameDisplay.blit(image6, [300, 150])
+        gameDisplay.blit(text, (550, 150))
+        gameDisplay.blit(text3, (550, 250))
+        gameDisplay.blit(text2, (550, 400))
         pygame.display.update()
         clock.tick(4)
 
@@ -462,7 +467,7 @@ def hangman():
     pygame.display.update()
 
     over = False
-    words = ["aardvark", "arangatan", "alligator", "antelope", "bear", "bee", "boar", "gecko", "cat", "chimpanzee", "dog", "elephant", "echidna", "sphynx"]
+    words = ["acquiesce", "acronym", "ambiguity", "analogy", "andragogy", "antonym", "assonance", "cognition", "contrived", "conundrum", "criterion", "deference", "dialect", "diction", "didactic", "divergent", "egregious", "eloquence", "emergent", "empathy", "enigma", "epitome", "epiphany", "epitaph", "erudite", "formative", "holistic", "homonym", "hubris", "hyperbole", "infamy", "innate", "irony", "jargon", "mentor", "metaphor", "mnemonic", "monologue", "motif", "myriad", "nemesis", "nominal", "norms", "obfuscate", "obtuse", "oxymoron", "paradox", "pedantic", "pedagogy", "perusal", "phonemes", "plethora", "pseudonym", "rubric", "sardonic", "satire", "simile", "soliloquy", "syntax", "thesis", "validity", "virtual"]
     maximum = len(words) - 1
     #print(word)
     points = 0
