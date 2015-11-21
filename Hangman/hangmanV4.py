@@ -36,7 +36,6 @@ def getIndex(word, guess):
 def gameIntro():
     intro = True
     while intro:
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -49,9 +48,9 @@ def gameIntro():
                     quit()
 
         gameDisplay.fill(white)
-        text = largeFont.render("Hello", True, black)
+        text = largeFont.render("Hangman!", True, black)
         explanation = smallFont.render("Press C to play or Q to quit", True, black)
-        gameDisplay.blit(text, (300, 200))
+        gameDisplay.blit(text, (220, 200))
         gameDisplay.blit(explanation, (250, 400))
         pygame.display.update()
         clock.tick(4)
@@ -60,7 +59,6 @@ def gameIntro():
 def gameEnd():
     intro = True
     while intro:
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -82,10 +80,8 @@ def gameEnd():
 
 
 def gameOver():
-    image6 = pygame.image.load("hangman1006.png")
     intro = True
     while intro:
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
