@@ -177,8 +177,6 @@ def score(points, strikes, length, exportGuesses=[['', [0, 1]], ['', [2, 3]]], g
         pygame.draw.line(gameDisplay, black, (340, 100), (390, 100), 4)
         pygame.draw.line(gameDisplay, black, (420, 100), (470, 100), 4)
         pygame.draw.line(gameDisplay, black, (500, 100), (550, 100), 4)
-        #letter1 = medFont.render("a", True, black)
-        #gameDisplay.blit(letter1, [110, 30])
 
         for sequence in exportGuesses:
             letter = sequence[0]
@@ -453,10 +451,10 @@ def hangman():
         length = len(word)
         guessList = []
         puzzle = ["__ "] * length
-        score(points, strikes, length,guessList)
+        score(points, strikes, length, guessList)
         while strikes < 6 and "__ " in puzzle:
             guess = getLetter()
-            if len(guess) == 1 and guess.isalpha():
+            if guess.isalpha():
                 if guess not in guessList:
                     if guess in word:
                         indexes = getIndex(word, guess)
