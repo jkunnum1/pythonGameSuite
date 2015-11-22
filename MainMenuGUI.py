@@ -41,6 +41,7 @@ game you would like to play!")
     #The game will start
     def openMazeGame1(self):
         from mazeGames import maze
+        #quit()
 
     def openMazeGame2(self):
         from mazeGames import newMaze

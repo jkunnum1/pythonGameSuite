@@ -187,7 +187,6 @@ def gameLoop():
 
     # un-initializes and quits pygame
     pygame.quit()
-    quit()
 
 gameLoop()
 

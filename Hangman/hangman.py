@@ -45,13 +45,11 @@ def gameIntro():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     intro = False
                 elif event.key == pygame.K_q:
                     pygame.quit()
-                    quit()
 
         gameDisplay.fill(white)
         text = largeFont.render("Hello", True, black)
@@ -69,7 +67,6 @@ def gameEnd():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     return(False)
@@ -93,7 +90,6 @@ def gameOver():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     return(False)
@@ -399,7 +395,6 @@ def actualGame():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:
                     guess = 'a'
