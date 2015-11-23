@@ -11,92 +11,100 @@ class RegisterGUI:
         self.__mainWindow = tkinter.Tk()
         self.__mainWindow.wm_title("Register")
 
-        self.__userFrame = tkinter.Frame(self.__mainWindow)
-        self.__passFrame = tkinter.Frame(self.__mainWindow)
-        self.__confirmPassFrame = tkinter.Frame(self.__mainWindow)
-        self.__firstNameFrame = tkinter.Frame(self.__mainWindow)
-        self.__lastNameFrame = tkinter.Frame(self.__mainWindow)
-        self.__emailFrame = tkinter.Frame(self.__mainWindow)
-        self.__ageFrame = tkinter.Frame(self.__mainWindow)
+        self.__title = tkinter.Frame(self.__mainWindow)
         self.__buttons = tkinter.Frame(self.__mainWindow)
+        
+        self.__titleText = tkinter.Label(self.__mainWindow,
+                                         text="Register New User:")
+        self.__titleText.grid(row=0, columnspan=2, pady=10)
         # User frame widgets. Format for this and all others will be:
         # (Attribute) : input : status
-        self.__userLabel = tkinter.Label(self.__userFrame, text="Username:")
-        self.__userEntry = tkinter.Entry(self.__userFrame, width=10)
-        self.__userStatusLabel = tkinter.Label(self.__userFrame, text = '')
+        self.__userLabel = tkinter.Label(self.__mainWindow, text="Username:")
+        self.__userEntry = tkinter.Entry(self.__mainWindow, width=20)
+        self.__userStatusLabel = tkinter.Label(self.__mainWindow, text = '')
+
         # grid Widgets:
-        self.__userLabel.grid(row=0, column=0)
-        self.__userEntry.grid(row=0, column=1)
-        self.__userStatusLabel.grid(row=0, column=2)
+        self.__userLabel.grid(row=1, column=0, sticky=W, padx=7, pady=1)
+        self.__userEntry.grid(row=1, column=1, sticky=E, padx=10, pady=1)
+        self.__userStatusLabel.grid(row=2, column=1)
+
         # Create Password Widgets:
-        self.__passLabel = tkinter.Label(self.__passFrame, text="Password:")
-        self.__passEntry = tkinter.Entry(self.__passFrame, width=10)
-        self.__passStatusLabel = tkinter.Label(self.__passFrame, text='')
+        self.__passLabel = tkinter.Label(self.__mainWindow, text="Password:")
+        self.__passEntry = tkinter.Entry(self.__mainWindow, width=20)
+        self.__placeholder = tkinter.Label(self.__mainWindow, text='')
 
         # Configure Password Entry Widget:
         self.__passEntry.config(show='*')
+        
         # grid Widgets:
-        self.__passLabel.grid(row=1, column=0)
-        self.__passEntry.grid(row=1, column=1)
-        self.__passStatusLabel.grid(row=1, column=3)
+        self.__passLabel.grid(row=3, column=0, sticky=W, padx=7, pady=1)
+        self.__passEntry.grid(row=3, column=1, sticky=E, padx=10, pady=1)
+        self.__placeholder.grid(row=4)
 
         # Create Confirm Password Widgets:
-        self.__confirmPassLabel = tkinter.Label(self.__confirmPassFrame,
-                                                text="Confirm:")
-        self.__confirmPassEntry = tkinter.Entry(self.__confirmPassFrame,
-                                                width=10)
-        self.__confirmPassStatusLabel = tkinter.Label(self.__confirmPassFrame,
+        self.__confirmPassLabel = tkinter.Label(self.__mainWindow,
+                                                text="Confirm Password:")
+        self.__confirmPassEntry = tkinter.Entry(self.__mainWindow,
+                                                width=20)
+        self.__confirmPassStatusLabel = tkinter.Label(self.__mainWindow,
                                                       text='')
+
         # Configure Password Entry Widget:
         self.__confirmPassEntry.config(show='*')
         # grid Widgets:
-        self.__confirmPassLabel.grid(row=2, column=0)
-        self.__confirmPassEntry.grid(row=2, column=1)
-        self.__confirmPassStatusLabel.grid(row=2, column=3)
+        self.__confirmPassLabel.grid(row=5, column=0, sticky=W, padx=7, pady=1)
+        self.__confirmPassEntry.grid(row=5, column=1, sticky=E, padx=10, pady=1)
+        self.__confirmPassStatusLabel.grid(row=6, column=1)
 
         # Create Name Input:
-        self.__firstNameLabel = tkinter.Label(self.__firstNameFrame,
+        self.__firstNameLabel = tkinter.Label(self.__mainWindow,
                                               text="First Name:")
-        self.__firstNameEntry = tkinter.Entry(self.__firstNameFrame,
-                                              width=10)
-        self.__firstNameStatusLabel = tkinter.Label(self.__firstNameFrame, text='')
+        self.__firstNameEntry = tkinter.Entry(self.__mainWindow,
+                                              width=20)
+        self.__firstNameStatusLabel = tkinter.Label(self.__mainWindow,
+                                                    text='')
+
         # grid Widgets:
-        self.__firstNameLabel.grid(row=3, column=0)
-        self.__firstNameEntry.grid(row=3, column=1)
-        self.__firstNameStatusLabel.grid(row=3, column=3)
+        self.__firstNameLabel.grid(row=7, column=0, sticky=W, padx=7, pady=1)
+        self.__firstNameEntry.grid(row=7, column=1, sticky=E, padx=10, pady=1)
+        self.__firstNameStatusLabel.grid(row=8, column=1)
 
         # Create Last Name Input:
-        self.__lastNameLabel = tkinter.Label(self.__lastNameFrame,
+        self.__lastNameLabel = tkinter.Label(self.__mainWindow,
                                               text="Last Name:")
-        self.__lastNameEntry = tkinter.Entry(self.__lastNameFrame,
-                                              width=10)
-        self.__lastNameStatusLabel = tkinter.Label(self.__lastNameFrame, text='')
+        self.__lastNameEntry = tkinter.Entry(self.__mainWindow,
+                                              width=20)
+        self.__lastNameStatusLabel = tkinter.Label(self.__mainWindow,
+                                                   text='')
+
         # grid Widgets:
-        self.__lastNameLabel.grid(row=4, column=0)
-        self.__lastNameEntry.grid(row=4, column=1)
-        self.__lastNameStatusLabel.grid(row=4, column=3)
+        self.__lastNameLabel.grid(row=9, column=0, sticky=W, padx=7, pady=1)
+        self.__lastNameEntry.grid(row=9, column=1, sticky=E, padx=10, pady=1)
+        self.__lastNameStatusLabel.grid(row=10, column=1)
         
         # Create email Input:
-        self.__emailLabel = tkinter.Label(self.__emailFrame,
+        self.__emailLabel = tkinter.Label(self.__mainWindow,
                                               text="Email:")
-        self.__emailEntry = tkinter.Entry(self.__emailFrame,
+        self.__emailEntry = tkinter.Entry(self.__mainWindow,
                                               width=20)
-        self.__emailStatusLabel = tkinter.Label(self.__emailFrame, text='')
+        self.__emailStatusLabel = tkinter.Label(self.__mainWindow, text='')
+
         # grid Widgets:
-        self.__emailLabel.grid(row=5, column=0)
-        self.__emailEntry.grid(row=5, column=1)
-        self.__emailStatusLabel.grid(row=5, column=3)
+        self.__emailLabel.grid(row=11, column=0, sticky=W, padx=7, pady=1)
+        self.__emailEntry.grid(row=11, column=1, sticky=E, padx=10, pady=1)
+        self.__emailStatusLabel.grid(row=12, column=1)
 
         # Create age Input:
-        self.__ageLabel = tkinter.Label(self.__ageFrame,
+        self.__ageLabel = tkinter.Label(self.__mainWindow,
                                               text="Age:")
-        self.__ageEntry = tkinter.Entry(self.__ageFrame,
-                                              width=10)
-        self.__ageStatusLabel = tkinter.Label(self.__ageFrame, text='')
+        self.__ageEntry = tkinter.Entry(self.__mainWindow,
+                                              width=20)
+        self.__ageStatusLabel = tkinter.Label(self.__mainWindow, text='')
+
         # grid Widgets:
-        self.__ageLabel.grid(row=6, column=0)
-        self.__ageEntry.grid(row=6, column=1)
-        self.__ageStatusLabel.grid(row=6, column=3)
+        self.__ageLabel.grid(row=13, column=0, sticky=W, padx=7, pady=1)
+        self.__ageEntry.grid(row=13, column=1, sticky=E, padx=10, pady=1)
+        self.__ageStatusLabel.grid(row=14, column=1)
 
         # Create buttons:
         self.__regButton = tkinter.Button(self.__buttons, text="Register",
@@ -104,20 +112,12 @@ class RegisterGUI:
         self.__cancelButton = tkinter.Button(self.__buttons, text="Cancel",
                                              command=self.__cancel)
         # grid buttons:
-        self.__regButton.grid(row=7, column=0)
-        self.__cancelButton.grid(row=7, column=1)
+        self.__regButton.grid(row=15, column=0, sticky=E)
+        self.__cancelButton.grid(row=15, column=1, sticky=W)
+        # grid button frame:
+        self.__buttons.grid(columnspan=2, padx=7, pady=10)
+        
 
-
-        # grid Frames:
-        self.__userFrame.grid(padx=5, pady=5, sticky=E)
-        self.__passFrame.grid(padx=5, pady=5, sticky=E)
-        self.__confirmPassFrame.grid(padx=5, pady=5, sticky=E)
-        self.__firstNameFrame.grid(padx=5, pady=5, sticky=E)
-        self.__lastNameFrame.grid(padx=5, pady=5, sticky=E)
-        self.__emailFrame.grid(padx=5, pady=5, sticky=E)
-        self.__ageFrame.grid(padx=5, pady=5, sticky=E)
-        self.__buttons.grid(padx=5, pady=5, sticky=E)
-        # Start the main loop
         tkinter.mainloop()
 
     def __getStati(self):
@@ -126,7 +126,7 @@ class RegisterGUI:
             self.__userStatusLabel.config(text="Invalid username!")
             self.__registered = False
         if not results[1]:
-            self.__confirmPassStatusLabel.config(text="Invalid password/passwords don't match!")
+            self.__confirmPassStatusLabel.config(text="Invalid password(s)!")
             self.__registered = False
         if not results[2]:
             self.__firstNameStatusLabel.config(text="First name cannot be blank!")
