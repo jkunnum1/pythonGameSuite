@@ -108,9 +108,9 @@ class RegisterGUI:
 
         # Create buttons:
         self.__regButton = tkinter.Button(self.__buttons, text="Register",
-                                          command=self.__process)
+                                          command=self.__process, relief="groove")
         self.__cancelButton = tkinter.Button(self.__buttons, text="Cancel",
-                                             command=self.__cancel)
+                                             command=self.__cancel, relief="groove")
         # grid buttons:
         self.__regButton.grid(row=15, column=0, sticky=E)
         self.__cancelButton.grid(row=15, column=1, sticky=W)

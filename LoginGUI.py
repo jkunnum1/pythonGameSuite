@@ -39,9 +39,9 @@ class LoginGUI:
         
         # Create Buttons:
         self.__logButton = tkinter.Button(self.__bottomFrame, text="Login",
-                                          command=self.__login)
+                                          command=self.__login, relief="groove")
         self.__regButton = tkinter.Button(self.__bottomFrame, text="Register",
-                                          command=self.__register)
+                                          command=self.__register, relief="groove")
         # Pack Widgets:
         self.__logButton.pack(side="left")
         self.__regButton.pack(side="left")
