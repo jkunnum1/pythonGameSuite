@@ -18,19 +18,19 @@ class MyGUI:
 user + ", and welcome to the python game suite! please select a \
 game you would like to play!")
         #Maze game button
-        self.__mazeButton = tkinter.Button(self.__mainWindow,\
+        self.__mazeButton = tkinter.Button(self.__mainWindow, relief = "groove",\
                            text = "Maze Game", command = self.openMazeGame1)
         #Second maze game button
-        self.__mazeButton2 = tkinter.Button(self.__mainWindow,\
+        self.__mazeButton2 = tkinter.Button(self.__mainWindow, relief = "groove",\
                            text = "Maze Game 2", command = self.openMazeGame2)
         #Hangman button
-        self.__hangManButton = tkinter.Button(self.__mainWindow,\
+        self.__hangManButton = tkinter.Button(self.__mainWindow, relief = "groove",\
                             text = "Hang Man", command = self.openHangMan)
         #Guitar Hero button
         self.__guitarHeroButton = tkinter.Button(self.__mainWindow,\
-                           text = "Guitar Hero", command = self.openGuitarHero)
+        relief = "groove", text = "Guitar Hero", command = self.openGuitarHero)
         #Quit button
-        self.__quitButton = tkinter.Button(self.__mainWindow,\
+        self.__quitButton = tkinter.Button(self.__mainWindow, relief = "groove",\
                             text = "Quit", command =  self.__mainWindow.destroy)
         #Packing
         self.__welcome.pack()
@@ -56,5 +56,4 @@ game you would like to play!")
 
     def openGuitarHero(self):
         from guitarHero import guitarHero
-
 
