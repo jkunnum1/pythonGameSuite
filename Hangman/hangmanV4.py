@@ -34,18 +34,18 @@ def getIndex(word, guess):
 
 
 def gameIntro():
-    intro = True
-    while intro:
+    loop = True
+    while loop:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            
+
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
-                    intro = False
+                    loop = False
                 elif event.key == pygame.K_q:
                     pygame.quit()
-                
+
 
         gameDisplay.fill(white)
         text = largeFont.render("Hangman!", True, black)
@@ -57,12 +57,12 @@ def gameIntro():
 
 
 def gameEnd():
-    intro = True
-    while intro:
+    loop = True
+    while loop:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            
+
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     return(False)
@@ -80,12 +80,12 @@ def gameEnd():
 
 
 def gameOver():
-    intro = True
-    while intro:
+    loop = True
+    while loop:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            
+
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                     return(False)
@@ -101,7 +101,7 @@ def gameOver():
         pygame.display.update()
         clock.tick(4)
 
-def score(points, strikes, length, exportGuesses=[['', [0, 1]], ['', [2, 3]]], guessList=[]):
+def score(points, strikes, length, correctGuesses=[['', [0, 1]], ['', [2, 3]]], incorrectGuesses=[]):
     image0 = pygame.image.load("Hangman/hangman1000.png")
     image1 = pygame.image.load("Hangman/hangman1001.png")
     image2 = pygame.image.load("Hangman/hangman1002.png")
@@ -130,11 +130,11 @@ def score(points, strikes, length, exportGuesses=[['', [0, 1]], ['', [2, 3]]], g
         gameDisplay.blit(image6, [300, 150])
 
     guessPositionList = [[30, 300], [85, 300], [140, 300], [30, 350], [85, 350], [140, 350]]
-    for index in range(len(guessList)):
-        letter = medFont.render(guessList[index], True, black)
+    for index in range(len(incorrectGuesses)):
+        letter = medFont.render(incorrectGuesses[index], True, black)
         gameDisplay.blit(letter, guessPositionList[index])
         pygame.display.update()
-            
+
 
     # list of lists for the location of the lines
     positionList = []
@@ -156,12 +156,12 @@ def score(points, strikes, length, exportGuesses=[['', [0, 1]], ['', [2, 3]]], g
 
 
     ###### putting the letters in place
-    for sequence in exportGuesses:
+    for sequence in correctGuesses:
             letter = sequence[0]
             letter1 = medFont.render(letter, True, black)
             for idx in sequence[1]:
                 gameDisplay.blit(letter1, [positionList[idx][0][0] + 10, 30])
-                    
+
     pygame.display.update()
 
 
@@ -171,7 +171,7 @@ def getLetter():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            
+
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:
                     guess = 'a'
@@ -229,7 +229,7 @@ def getLetter():
                     guess = ''
                 return(guess)
 
-def hangman():
+def gameLoop():
     gameDisplay.fill(white)
     pygame.display.update()
 
@@ -239,21 +239,21 @@ def hangman():
     points = 0
     while not over:
         strikes = 0
-        exportGuesses = []
+        correctGuesses = []
         randomIndex = random.randint(0, maximum)
         word = words[randomIndex]
         length = len(word)
-        guessList = []
+        incorrectGuesses = []
         puzzle = ["__ "] * length
-        score(points, strikes, length, guessList)
+        score(points, strikes, length, incorrectGuesses)
         while strikes < 6 and "__ " in puzzle:
             guess = getLetter()
             if guess.isalpha():
-                if guess not in guessList:
+                if guess not in incorrectGuesses:
                     if guess in word:
                         indexes = getIndex(word, guess)
-                        if (guess, indexes) not in exportGuesses:
-                            exportGuesses.append((guess, indexes))
+                        if (guess, indexes) not in correctGuesses:
+                            correctGuesses.append((guess, indexes))
                             for letter in word:
                                 if letter == guess:
                                     points += 1
@@ -261,13 +261,13 @@ def hangman():
                                 puzzle[index] = guess + ' '
                     else:
                         strikes += 1
-                        guessList.append(guess)
-            score(points, strikes, length, exportGuesses, guessList)
+                        incorrectGuesses.append(guess)
+            score(points, strikes, length, correctGuesses, incorrectGuesses)
         if strikes == 6:
             for letter in word:
                 indexes = getIndex(word, letter)
-                exportGuesses.append((letter, indexes))
-                score(points, strikes, length, exportGuesses, guessList)
+                correctGuesses.append((letter, indexes))
+                score(points, strikes, length, correctGuesses, incorrectGuesses)
             if gameOver():
                 over = True
             else:
@@ -279,7 +279,7 @@ def hangman():
 
 def menu():
     gameIntro()
-    finalScore = hangman()
+    finalScore = gameLoop()
     print("The final score was", finalScore)
     pygame.quit()
 
