@@ -41,17 +41,17 @@ def gameIntro():
                 pygame.quit()
 
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
+                if event.key == pygame.K_p:
                     loop = False
-                elif event.key == pygame.K_q:
+                elif event.key == pygame.K_e:
                     pygame.quit()
 
 
         gameDisplay.fill(white)
-        text = largeFont.render("Hangman!", True, black)
-        explanation = smallFont.render("Press C to play or Q to quit", True, black)
-        gameDisplay.blit(text, (220, 200))
-        gameDisplay.blit(explanation, (250, 400))
+        title = largeFont.render("Hangman!", True, black)
+        explanation = smallFont.render("Press P to play or E to exit", True, black)
+        gameDisplay.blit(title, (220, 200))
+        gameDisplay.blit(explanation, (270, 400))
         pygame.display.update()
         clock.tick(4)
 
@@ -64,17 +64,17 @@ def gameEnd():
                 pygame.quit()
 
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
+                if event.key == pygame.K_p:
                     return(False)
-                elif event.key == pygame.K_q:
+                elif event.key == pygame.K_e:
                     return(True)
 
-        text = largeFont.render("Nice", True, red)
-        text3 = largeFont.render("Job!", True, red)
-        text2 = smallFont.render("C for play, Q for quit", True, black)
-        gameDisplay.blit(text, (550, 150))
-        gameDisplay.blit(text3, (550, 250))
-        gameDisplay.blit(text2, (550, 400))
+        niceText = largeFont.render("Nice", True, red)
+        jobText = largeFont.render("Job!", True, red)
+        explanation = smallFont.render("Press P to play or E to exit", True, black)
+        gameDisplay.blit(niceText, (550, 150))
+        gameDisplay.blit(jobText, (550, 250))
+        gameDisplay.blit(explanation, (525, 400))
         pygame.display.update()
         clock.tick(4)
 
@@ -87,17 +87,17 @@ def gameOver():
                 pygame.quit()
 
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
+                if event.key == pygame.K_p:
                     return(False)
-                elif event.key == pygame.K_q:
+                elif event.key == pygame.K_e:
                     return(True)
 
-        text = largeFont.render("Game", True, red)
-        text3 = largeFont.render("Over", True, red)
-        text2 = smallFont.render("C for play, Q for quit", True, black)
-        gameDisplay.blit(text, (550, 150))
-        gameDisplay.blit(text3, (550, 250))
-        gameDisplay.blit(text2, (550, 400))
+        gameText = largeFont.render("Game", True, red)
+        overText = largeFont.render("Over", True, red)
+        explanation = smallFont.render("Press P to play or E to exit", True, black)
+        gameDisplay.blit(gameText, (550, 150))
+        gameDisplay.blit(overText, (550, 250))
+        gameDisplay.blit(explanation, (525, 400))
         pygame.display.update()
         clock.tick(4)
 
