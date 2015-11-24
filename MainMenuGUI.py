@@ -26,14 +26,18 @@ game you would like to play!")
         #Hangman button
         self.__hangManButton = tkinter.Button(self.__mainWindow,\
                             text = "Hang Man", command = self.openHangMan)
+        #Guitar Hero button
+        self.__guitarHeroButton = tkinter.Button(self.__mainWindow,\
+                           text = "Guitar Hero", command = self.openGuitarHero)
         #Quit button
         self.__quitButton = tkinter.Button(self.__mainWindow,\
                             text = "Quit", command =  self.__mainWindow.destroy)
-        #Paccking
+        #Packing
         self.__welcome.pack()
         self.__mazeButton.pack()
         self.__mazeButton2.pack()
         self.__hangManButton.pack()
+        self.__guitarHeroButton.pack()
         self.__quitButton.pack()
         tkinter.mainloop()
 
@@ -45,7 +49,12 @@ game you would like to play!")
 
     def openMazeGame2(self):
         from mazeGames import newMaze
+
     #Same as above but with Hang man
     def openHangMan(self):
-        from Hangman import hangman
+        from Hangman import hangmanV4
+
+    def openGuitarHero(self):
+        from guitarHero import guitarHero
+
 
