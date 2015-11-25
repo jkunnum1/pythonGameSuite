@@ -65,12 +65,11 @@ def messageToScreen(msg, color, score):
     gameDisplay.blit(screenText, [displayWidth // 4, 0])
 
 
-def drawBasics():
-    gameDisplay.fill(black)
-    gameDisplay.blit(blueOpen, [225, 550])
-    gameDisplay.blit(greenOpen, [325, 550])
-    gameDisplay.blit(orangeOpen, [425, 550])
-    gameDisplay.blit(redOpen, [525, 550])
+def drawBasics(bImage, gImage, oImage, rImage):
+    gameDisplay.blit(bImage, [225, 550])
+    gameDisplay.blit(gImage, [325, 550])
+    gameDisplay.blit(oImage, [425, 550])
+    gameDisplay.blit(rImage, [525, 550])
     gameDisplay.blit(meter, [10, 200])
     # draw columns
     pygame.draw.line(gameDisplay, white, (200, 0), (200, 800), 2)
@@ -80,7 +79,7 @@ def drawBasics():
     pygame.draw.line(gameDisplay, white, (600, 0), (600, 800), 2)
 
 
-def displayNotes(targets):
+def displayNotes(targets, score):
     for obj in targets:
         color = obj.getRandColor()
         if color == 1:
@@ -94,13 +93,27 @@ def displayNotes(targets):
         obj.moveY()
     if len(targets) != 0 and targets[0].getYValue() > displayHeight:
         del targets[0]
+        score -= 1
+    return score
 
 
 def checkHit(color, targets, score):
-    for obj in targets:
-        if obj.getYValue() >= 540 and obj.getYValue() <= 560:
-            if obj.getRandColor() == color:
-                score += 1
+    # index of target to be deleted
+    # the index will never be negative 1
+    toDelete = -1
+    addScore = False
+    for index in range(len(targets)):
+        if targets[index].getYValue() >= 540 and targets[index].getYValue() <= 560:
+            if targets[index].getRandColor() == color:
+                addScore = True
+                toDelete = index
+    if toDelete != -1:
+        del targets[toDelete]
+    if addScore:
+        score += 1
+    else:
+        if score != 0:
+            score -= 1
     return score
 
 
@@ -110,11 +123,15 @@ def gameLoop():
     score = 0
     counter = 1
     color = black
+    redImage = redOpen
+    blueImage = blueOpen
+    orangeImage = orangeOpen
+    greenImage = greenOpen
     targets = []
     meter = 0
     targets.append(Notes.Notes())
     while not gameExit:
-        drawBasics()
+        gameDisplay.fill(black)
         while gameOver:
             if checkWin:
                 messageToScreen("You won! Press p to play to e to exit",
@@ -151,16 +168,31 @@ def gameLoop():
                 # j == blue button 
                 if event.key == pygame.K_j:
                     score = checkHit(1, targets, score)
+                    blueImage = blueFill
                 # k == green button
                 if event.key == pygame.K_k:
                     score = checkHit(2, targets, score)
+                    greenImage = greenFill
                 # l == orange button
                 if event.key == pygame.K_l:
                     score = checkHit(3, targets, score)
+                    orangeImage = orangeFill
                 # ; == red button
                 if event.key == pygame.K_SEMICOLON:
                     score = checkHit(4, targets, score)
-        
+                    redImage = redFill
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_j:
+                    blueImage = blueOpen
+                # k == green button
+                if event.key == pygame.K_k:
+                    greenImage = greenOpen
+                # l == orange button
+                if event.key == pygame.K_l:
+                    orangeImage = orangeOpen
+                # ; == red button
+                if event.key == pygame.K_SEMICOLON:
+                    redImage = redOpen
         counter += 1
         if counter % 7 == 0:
             meter += 1
@@ -168,14 +200,14 @@ def gameLoop():
             if randNum == 1:
                 targets.append(Notes.Notes())
             counter = 1
-        displayNotes(targets)
+        score = displayNotes(targets, score)
+        drawBasics(blueImage, greenImage, orangeImage, redImage)
         checkWin = displayScore(score, meter)
         if checkWin:
             gameOver = True
         pygame.display.update()
         # sleep -> frames per second (lower number = slower)
         clock.tick(framePerSec)
-        subScore = True
     
     # un-initializes and quits pygame
     pygame.quit()

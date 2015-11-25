@@ -25,7 +25,7 @@ black = (0,0, 0)
 red = (255, 0, 0)
 green = (0, 155, 0)
 orange = (255, 165, 0)
-teal = (32, 178, 170)
+
 # set display dimensions
 displayWidth = 800
 displayHeight = 600
