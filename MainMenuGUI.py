@@ -6,6 +6,10 @@ import tkinter
 
 import tkinter.messagebox
 
+from mazeGames import Maze
+
+from mazeGames import NewMaze
+
 class MyGUI:
     def __init__(self):
         #Imports online user, and saves username
@@ -44,11 +48,10 @@ game you would like to play!")
     #When maze game button is hit, it will open a window, when user hits 'ok'
     #The game will start
     def openMazeGame1(self):
-        from mazeGames import maze
-        #quit()
+        Maze.Maze()
 
     def openMazeGame2(self):
-        from mazeGames import newMaze
+        NewMaze.NewMaze()
 
     #Same as above but with Hang man
     def openHangMan(self):
