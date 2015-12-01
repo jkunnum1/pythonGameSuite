@@ -101,33 +101,33 @@ def gameOver():
         pygame.display.update()
         clock.tick(4)
 
-def score(points, strikes, length, correctGuesses=[['', [0, 1]], ['', [2, 3]]], incorrectGuesses=[]):
-    image0 = pygame.image.load("Hangman/hangman1000.png")
-    image1 = pygame.image.load("Hangman/hangman1001.png")
-    image2 = pygame.image.load("Hangman/hangman1002.png")
-    image3 = pygame.image.load("Hangman/hangman1003.png")
-    image4 = pygame.image.load("Hangman/hangman1004.png")
-    image5 = pygame.image.load("Hangman/hangman1005.png")
-    image6 = pygame.image.load("Hangman/hangman1006.png")
+def displayToScreen(points, strikes, length, correctGuesses=[['', [0, 1]], ['', [2, 3]]], incorrectGuesses=[]):
+    zeroLimbs = pygame.image.load("Hangman/hangman1000.png")
+    oneLimb = pygame.image.load("Hangman/hangman1001.png")
+    twoLimbs = pygame.image.load("Hangman/hangman1002.png")
+    threeLimbs = pygame.image.load("Hangman/hangman1003.png")
+    fourLimbs = pygame.image.load("Hangman/hangman1004.png")
+    fiveLimbs = pygame.image.load("Hangman/hangman1005.png")
+    sixLimbs = pygame.image.load("Hangman/hangman1006.png")
     gameDisplay.fill(white)
     pointsDisplay = smallFont.render("Score: " + str(points), True, black)
     strikesDisplay = smallFont.render("Strikes: " + str(strikes) + "/6", True, black)
     gameDisplay.blit(pointsDisplay, [0, 0])
     gameDisplay.blit(strikesDisplay, [100, 0])
     if strikes == 0:
-        gameDisplay.blit(image0, [300, 150])
+        gameDisplay.blit(zeroLimbs, [300, 150])
     elif strikes == 1:
-        gameDisplay.blit(image1, [300, 150])
+        gameDisplay.blit(oneLimb, [300, 150])
     elif strikes == 2:
-        gameDisplay.blit(image2, [300, 150])
+        gameDisplay.blit(twoLimbs, [300, 150])
     elif strikes == 3:
-        gameDisplay.blit(image3, [300, 150])
+        gameDisplay.blit(threeLimbs, [300, 150])
     elif strikes == 4:
-        gameDisplay.blit(image4, [300, 150])
+        gameDisplay.blit(fourLimbs, [300, 150])
     elif strikes == 5:
-        gameDisplay.blit(image5, [300, 150])
+        gameDisplay.blit(fiveLimbs, [300, 150])
     elif strikes == 6:
-        gameDisplay.blit(image6, [300, 150])
+        gameDisplay.blit(sixLimbs, [300, 150])
 
     guessPositionList = [[30, 300], [85, 300], [140, 300], [30, 350], [85, 350], [140, 350]]
     for index in range(len(incorrectGuesses)):
@@ -245,7 +245,7 @@ def gameLoop():
         length = len(word)
         incorrectGuesses = []
         puzzle = ["__ "] * length
-        score(points, strikes, length, incorrectGuesses)
+        displayToScreen(points, strikes, length, incorrectGuesses)
         while strikes < 6 and "__ " in puzzle:
             guess = getLetter()
             if guess.isalpha():
@@ -262,12 +262,12 @@ def gameLoop():
                     else:
                         strikes += 1
                         incorrectGuesses.append(guess)
-            score(points, strikes, length, correctGuesses, incorrectGuesses)
+            displayToScreen(points, strikes, length, correctGuesses, incorrectGuesses)
         if strikes == 6:
             for letter in word:
                 indexes = getIndex(word, letter)
                 correctGuesses.append((letter, indexes))
-                score(points, strikes, length, correctGuesses, incorrectGuesses)
+                displayToScreen(points, strikes, length, correctGuesses, incorrectGuesses)
             if gameOver():
                 over = True
             else:
