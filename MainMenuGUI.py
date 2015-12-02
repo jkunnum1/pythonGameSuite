@@ -10,6 +10,8 @@ from mazeGames import Maze
 
 from mazeGames import NewMaze
 
+from guitarHero import GuitarHero
+
 class MyGUI:
     def __init__(self):
         #Imports online user, and saves username
@@ -58,5 +60,5 @@ game you would like to play!")
         from Hangman import hangmanV4
 
     def openGuitarHero(self):
-        from guitarHero import guitarHero
+        GuitarHero.GuitarHero()
 
