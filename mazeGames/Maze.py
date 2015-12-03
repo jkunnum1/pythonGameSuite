@@ -17,7 +17,7 @@ class Maze():
         #  append score each time there is a game over  #
         ### LOAD HIGHSCORE TO TOTAL SCORE TO BE SHOWN ###
         try:
-            self.__totalScore = [self.__highScores[self.__user[0]], 0]
+            self.__totalScore = [self.__highScores[self.__user[0]]]
         except KeyError:
             # User is new, so key above wont work
             self.__highScores[self.__user[0]] = 0

@@ -163,7 +163,6 @@ class GuitarHero:
             else:
                 return False
         else:
-            pygame.draw.rect(self.__gameDisplay, self.__blue, [10, 400, 50, 0])
             return False
 
 
