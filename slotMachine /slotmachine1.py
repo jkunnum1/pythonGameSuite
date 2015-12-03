@@ -1,4 +1,14 @@
 # Project
+# William McLaughlin
+# A 51
+# S. Douglas Wehbe
+# A 52
+# Julie Kunnumpurath
+# A 53
+# John Henry Burns
+# A 52
+# Rebecca Trackman
+# A 52
 
 import random
 print("Welcome to the Slot Machine Simulator. You start with $20. Each \

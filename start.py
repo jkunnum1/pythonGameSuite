@@ -1,4 +1,14 @@
 #Project
+# William McLaughlin
+# A 51
+# S. Douglas Wehbe
+# A 52
+# Julie Kunnumpurath
+# A 53
+# John Henry Burns
+# A 52
+# Rebecca Trackman
+# A 52
 
 import pickle
 import LoginGUI

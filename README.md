@@ -1,13 +1,18 @@
 # pythonGameSuite
-Authors: William McLaughlin, S. Douglas Wehbe, Julie Kunnumpurath, John Henry Burns, Rebecca Trackman
+Authors: 
+William McLaughlin  --  A 51
+S. Douglas Wehbe  --  A 52
+Julie Kunnumpurath  --  A 53
+John Henry Burns  --  A 52
+Rebecca Trackman  --  A 52
 
 This is a pygame suite where users can accumulate points by playing games such as slots, hangman, etc
 
 First game: Maze Flyer
 
-Second game: Hangman
-
 Third game: second Maze game
+
+Second game: Hangman
 
 Fourth game: Guitar Hero
 
