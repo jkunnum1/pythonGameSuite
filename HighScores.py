@@ -4,7 +4,7 @@ import tkinter
 
 import tkinter.messagebox
 
-class Scores:
+class HighScores:
 	def __init__(self):
 		#main window
 		self.__mainWindow = tkinter.Tk()
@@ -84,8 +84,3 @@ class Scores:
 				tkinter.messagebox.showinfo("ERROR", "No scores yet!")
 		except IOError:
 			tkinter.messagebox.showinfo("ERROR", "Invalid Entry")
-
-def main():
-	scoreboard = Scores()
-
-main()
