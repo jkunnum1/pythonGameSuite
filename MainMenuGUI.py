@@ -23,6 +23,8 @@ from mazeGames import NewMaze
 
 from guitarHero import GuitarHero
 
+import HighScores
+
 class MyGUI:
     def __init__(self):
         #Imports online user, and saves username
@@ -63,6 +65,11 @@ game you would like to play!", font=("fixedsys", 15), fg="#ff9900")
         relief = "groove", text = "Guitar Hero", command = self.openGuitarHero\
         ,bg="#c2e4f0", activebackground="#d6edf5", border=0, \
         font=("fixedsys", 6))
+
+        self.__highScores = tkinter.Button(self.__mainWindow, relief = "groove",\
+                           text = "High Scores", command = self.viewHighScores,
+                           bg="#c2e4f0", activebackground="#d6edf5", border=0,\
+                           font=("fixedsys", 6))
         
         #Quit button
         self.__quitButton = tkinter.Button(self.__mainWindow, relief = "groove",\
@@ -76,6 +83,7 @@ game you would like to play!", font=("fixedsys", 15), fg="#ff9900")
         self.__mazeButton2.pack()
         self.__hangManButton.pack()
         self.__guitarHeroButton.pack()
+        self.__highScores.pack()
         self.__quitButton.pack()
         tkinter.mainloop()
 
@@ -93,5 +101,9 @@ game you would like to play!", font=("fixedsys", 15), fg="#ff9900")
 
     def openGuitarHero(self):
         GuitarHero.GuitarHero()
+
+    def viewHighScores(self):
+        HighScores.HighScores()
+
 
 
