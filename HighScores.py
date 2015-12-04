@@ -55,28 +55,44 @@ class HighScores:
 
 	def __maze1(self):
 		self.__filename = "mazeGames/mazeScores.dat"
+		self.__mazeScore.config(state="active")
+		self.__mazeScore2.config(state="normal")
+		self.__guitarScores.config(state="normal")
+		self.__hangman.config(state="normal")
 		self.__score()
 
 	def __maze2(self):
 		self.__filename = "mazeGames/mazeScores2.dat"
+		self.__mazeScore.config(state="normal")
+		self.__mazeScore2.config(state="active")
+		self.__guitarScores.config(state="normal")
+		self.__hangman.config(state="normal")
 		self.__score()
 
 	def __guitarHero(self):
 		self.__filename = "guitarHero/guitarHero.dat"
+		self.__mazeScore.config(state="normal")
+		self.__mazeScore2.config(state="normal")
+		self.__guitarScores.config(state="active")
+		self.__hangman.config(state="normal")
 		self.__score()
 
 	def __hangman(self):
 		self.__filename = "Hangman/hangmanScores.dat"
+		self.__mazeScore.config(state="normal")
+		self.__mazeScore2.config(state="normal")
+		self.__guitarScores.config(state="normal")
+		self.__hangman.config(state="active")
 		self.__score()
 
 	def __score(self):
+		ranks = ""
 		try:
 			myDict = pickle.load(open(self.__filename, "rb"))
 			scoresList = []
 			for key in myDict:
 				scoresList.append(myDict[key])
 
-			ranks = ""
 			if len(myDict) > 0:
 				if len(myDict) > 3:
 					numScores = 3
@@ -93,6 +109,7 @@ class HighScores:
 					scoresList.remove(max(scoresList))
 				self.__scoreLabel.configure(text=ranks)
 			else:
-				tkinter.messagebox.showinfo("ERROR", "No scores yet!")
+				ranks="No scores yet!"
 		except IOError:
-			tkinter.messagebox.showinfo("ERROR", "Invalid Entry")
+			ranks = "Invalid Entry"
+		self.__scoreLabel.configure(text=ranks)
