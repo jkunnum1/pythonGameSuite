@@ -22,17 +22,18 @@ class GuitarHero:
 
         ############################
         '''LOAD ONLINE USER'''
+        self.__allUsers = pickle.load(open("users.dat", "rb"))
         self.__user = pickle.load(open("userOnline.dat", "rb"))
         self.__highScores = pickle.load(open("guitarHero/guitarHero.dat", "rb"))
         ############################
         #  append score each time there is a game over  #
         ### LOAD HIGHSCORE TO TOTAL SCORE TO BE SHOWN ###
+        self.__highestScore = 0
         try:
-            self.__totalScore = [self.__highScores[self.__user[0]], 0]
+            self.__highestScore = self.__highScores[self.__user[0]]
         except KeyError:
             # User is new, so key above wont work
             self.__highScores[self.__user[0]] = 0
-            self.__totalScore = [0]
 
         # set colors rgb
         self.__white = (255, 255, 255) 
@@ -96,14 +97,16 @@ class GuitarHero:
                 # print instructions to continue and check for input
                     self.__messageToScreen("Game over, press p to play to e to exit",
                         score)
-                self.__totalScore.append(score)
                 pygame.display.update()
                 for event in pygame.event.get():
                     if (event.type == pygame.QUIT or
                        (event.type == pygame.KEYDOWN and
                        event.key == pygame.K_e)):
+                        self.__addToTotal(score)
                         return False
-                    if event.key == pygame.K_p:
+                    if (event.type == pygame.KEYDOWN and
+                       event.key == pygame.K_p):
+                        self.__addToTotal(score)
                         return True
             # for every time that there is an event
             for event in pygame.event.get():
@@ -159,7 +162,7 @@ class GuitarHero:
 
     def __displayScore(self, score, meter):
         # display high score and current score
-        msg = "H: " + str(max(self.__totalScore))
+        msg = "H: " + str(self.__highestScore)
         screenText = self.__font.render(msg, True, self.__white)
         self.__gameDisplay.blit(screenText, [10, 10])
         msg = "C: " + str(score)
@@ -180,10 +183,11 @@ class GuitarHero:
 
     # prints whatever message you give with color specified
     def __messageToScreen(self, msg, score):
-        if score > max(self.__totalScore):
+        if score > self.__highScores[self.__user[0]]:
             msg2 = "You have a new high of " + str(score)
             ###### SAVE HIGH SCORE ######
-            self.__highScores[self.__user[0]] = score
+            self.__highestScore = score
+            self.__highScores[self.__user[0]] = self.__highestScore
             pickle.dump(self.__highScores, open("guitarHero/guitarHero.dat", "wb"))
             #############################
             screenText = self.__font.render(msg2, True, self.__white)
@@ -191,7 +195,12 @@ class GuitarHero:
         screenText = self.__font.render(msg, True, self.__white)
         self.__gameDisplay.blit(screenText, [self.__displayWidth // 4, 0])
 
-
+    def __addToTotal(self, score):
+        ##### ADD TO THE TOTAL SCORE #####
+        self.__user[-1] = self.__allUsers[self.__user[0]][-1] + score
+        self.__allUsers[self.__user[0]] = self.__user
+        pickle.dump(self.__allUsers, open("users.dat", "wb"))
+        ##################################
 
     def __drawBasics(self, bImage, gImage, oImage, rImage):
         self.__gameDisplay.blit(bImage, [225, 550])

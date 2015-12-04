@@ -23,17 +23,18 @@ class Maze():
 
         ############################
         '''LOAD ONLINE USER'''
+        self.__allUsers = pickle.load(open("users.dat", "rb"))
         self.__user = pickle.load(open("userOnline.dat", "rb"))
         self.__highScores = pickle.load(open("mazeGames/mazeScores.dat", "rb"))
         ############################
         #  append score each time there is a game over  #
         ### LOAD HIGHSCORE TO TOTAL SCORE TO BE SHOWN ###
+        self.__highestScore = 0
         try:
-            self.__totalScore = [self.__highScores[self.__user[0]]]
+            self.__highestScore = self.__highScores[self.__user[0]]
         except KeyError:
             # User is new, so key above wont work
             self.__highScores[self.__user[0]] = 0
-            self.__totalScore = [0]
         # set colors rgb
         self.__white = (255, 255, 255)
         self.__black = (0, 0, 0)
@@ -95,14 +96,15 @@ class Maze():
                 vehicle.moveX(0)
                 vehicle.drawVehicle()
                 pygame.display.update()
-                self.__totalScore.append(score)
                 for event in pygame.event.get():
                     if (event.type == pygame.QUIT or
                        (event.type == pygame.KEYDOWN and
                        event.key == pygame.K_e)):
+                        self.__addToTotal(score)
                         return False
                     if (event.type == pygame.KEYDOWN and
                         event.key == pygame.K_p):
+                        self.__addToTotal(score)
                         return True
             # for every time that there is an event
             for event in pygame.event.get():
@@ -185,7 +187,7 @@ class Maze():
 
     def __displayScore(self, score):
         # display high score and current score
-        msg = "H: " + str(max(self.__totalScore))
+        msg = "H: " + str(self.__highestScore)
         screenText = self.__font.render(msg, True, self.__orange)
         self.__gameDisplay.blit(screenText, [10, 10])
         msg = "C: " + str(score)
@@ -194,10 +196,11 @@ class Maze():
 
     # prints whatever message you give with color specified
     def __messageToScreen(self, msg, color, score):
-        if score > max(self.__totalScore):
+        if score > self.__highScores[self.__user[0]]:
             msg2 = "You have a new high of " + str(score)
             ###### SAVE HIGH SCORE ######
-            self.__highScores[self.__user[0]] = score
+            self.__highestScore = score
+            self.__highScores[self.__user[0]] = self.__highestScore
             pickle.dump(self.__highScores, open("mazeGames/mazeScores.dat", "wb"))
             #############################
             screenText = self.__font.render(msg2, True, color)
@@ -205,6 +208,13 @@ class Maze():
         screenText = self.__font.render(msg, True, color)
         self.__gameDisplay.blit(screenText, [self.__displayWidth // 4, 0])
 
+    def __addToTotal(self, score):
+        ##### ADD TO THE TOTAL SCORE #####
+        self.__user[-1] = self.__allUsers[self.__user[0]][-1] + score
+        self.__allUsers[self.__user[0]] = self.__user
+        pickle.dump(self.__allUsers, open("users.dat", "wb"))
+        ##################################
+        
     # adds a new barrier to the list
     def __addBarrier(self, barriers):
         barrier = Barriers.Barriers(self.__displayWidth, self.__displayHeight,
