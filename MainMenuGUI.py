@@ -23,6 +23,8 @@ from mazeGames import NewMaze
 
 from guitarHero import GuitarHero
 
+from Hangman import Hangman
+
 import HighScores
 
 class MyGUI:
@@ -105,7 +107,7 @@ game you would like to play!", font=("fixedsys", 15), fg="#ff9900")
 
     #Same as above but with Hang man
     def openHangMan(self):
-        from Hangman import hangmanV5
+        Hangman.Hangman()
 
     def openGuitarHero(self):
         GuitarHero.GuitarHero()
