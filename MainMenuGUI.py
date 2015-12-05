@@ -105,7 +105,7 @@ game you would like to play!", font=("fixedsys", 15), fg="#ff9900")
 
     #Same as above but with Hang man
     def openHangMan(self):
-        from Hangman import hangmanV4
+        from Hangman import hangmanV5
 
     def openGuitarHero(self):
         GuitarHero.GuitarHero()
