@@ -23,7 +23,9 @@ from mazeGames import NewMaze
 
 from guitarHero import GuitarHero
 
-from Hangman import Hangman
+from Hangman import hangmanV5
+
+from slotmachine import SlotMachine
 
 import HighScores
 
@@ -74,6 +76,12 @@ game you would like to play!", font=("fixedsys", 15), fg="#ff9900")
         ,bg="#c2e4f0", activebackground="#d6edf5", border=0, \
         font=("fixedsys", 6))
 
+        #Slotmachine button
+        self.__slotButton = tkinter.Button(self.__buttons, relief\
+                = "groove", text = "Slot machine", command = self.openSlots,\
+                bg="#c2e4f0", activebackground="#d6edf5", border=0,\
+                font=("fixedsys", 6))
+
         self.__highScores = tkinter.Button(self.__buttons, relief = "groove",\
                            text = "High Scores", command = self.viewHighScores,
                            bg="#c2e4f0", activebackground="#d6edf5", border=0,\
@@ -91,8 +99,9 @@ game you would like to play!", font=("fixedsys", 15), fg="#ff9900")
         self.__mazeButton2.grid(column=1, sticky=E, padx=1, pady=5)
         self.__hangManButton.grid(column=2, sticky=E, padx=1, pady=5)
         self.__guitarHeroButton.grid(column=3, sticky=E, padx=1, pady=5)
-        self.__highScores.grid(column=4, sticky=E, padx=1, pady=5)
-        self.__quitButton.grid(column=5, sticky=E, padx=1, pady=5)
+        self.__slotButton.grid(column=4, sticky=E, padx=1, pady=5)
+        self.__highScores.grid(column=5, sticky=E, padx=1, pady=5)
+        self.__quitButton.grid(column=6, sticky=E, padx=1, pady=5)
         self.__title.grid()
         self.__buttons.grid()
         tkinter.mainloop()
@@ -107,10 +116,13 @@ game you would like to play!", font=("fixedsys", 15), fg="#ff9900")
 
     #Same as above but with Hang man
     def openHangMan(self):
-        Hangman.Hangman()
+        hangmanV5.Hangman()
 
     def openGuitarHero(self):
         GuitarHero.GuitarHero()
+
+    def openSlots(self):
+        SlotMachine.SlotMachine()
 
     def viewHighScores(self):
         HighScores.HighScores()
