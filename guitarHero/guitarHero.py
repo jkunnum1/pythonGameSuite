@@ -91,11 +91,11 @@ class GuitarHero:
             self.__gameDisplay.fill(self.__black)
             while gameOver:
                 if checkWin:
-                    self.__messageToScreen("You won! Press p to play to e to exit",
+                    self.__messageToScreen("You won! Press p to play or e to exit",
                         score)
                 else:
                 # print instructions to continue and check for input
-                    self.__messageToScreen("Game over, press p to play to e to exit",
+                    self.__messageToScreen("Game over, press p to play or e to exit",
                         score)
                 pygame.display.update()
                 for event in pygame.event.get():

@@ -36,6 +36,7 @@ class SlotMachine:
         self.__white = (255,255,255)
         self.__black = (0,0,0)
         self.__gold = (255,205,0)
+        self.__brown = (162, 107, 0)
 
         #sets dimensions of screen
         self.__displayWidth = 800
@@ -44,12 +45,24 @@ class SlotMachine:
 
         #Makes title
         pygame.display.set_caption('Slot Machine')
-        self.__spinImage = pygame.image.load("slotmachine/pic0.png").convert()
-        self.__oneImage = pygame.image.load("slotmachine/pic1.png").convert()
-        self.__twoImage = pygame.image.load("slotmachine/pic2.png").convert()
-        self.__threeImage = pygame.image.load("slotmachine/pic3.png").convert()
-        self.__fourImage = pygame.image.load("slotmachine/pic4.png").convert()
-        self.__imageList = [self.__spinImage, self.__oneImage, self.__twoImage, self.__threeImage, self.__fourImage]
+        # self.__spinImage = pygame.image.load("slotmachine/pic0.png").convert()
+        # self.__oneImage = pygame.image.load("slotmachine/pic1.png").convert()
+        # self.__twoImage = pygame.image.load("slotmachine/pic2.png").convert()
+        # self.__threeImage = pygame.image.load("slotmachine/pic3.png").convert()
+        # self.__fourImage = pygame.image.load("slotmachine/pic4.png").convert()
+        self.__oneImage = pygame.image.load("slotmachine/aPic.png").convert()
+        self.__twoImage = pygame.image.load("slotmachine/bearPic.png").convert()
+        self.__threeImage = pygame.image.load("slotmachine/deerPic.png").convert()
+        self.__fourImage = pygame.image.load("slotmachine/foxPic.png").convert()
+        self.__fiveImage = pygame.image.load("slotmachine/jPic.png").convert()
+        self.__sixImage = pygame.image.load("slotmachine/kPic.png").convert()
+        self.__sevenImage = pygame.image.load("slotmachine/naturePic.png").convert()
+        self.__eightImage = pygame.image.load("slotmachine/qPic.png").convert()
+        self.__nineImage = pygame.image.load("slotmachine/wolfPic.png").convert()
+        self.__bgImage = pygame.image.load("slotmachine/background.png").convert()
+        self.__imageList = [self.__oneImage, self.__twoImage, self.__threeImage,
+                            self.__fourImage, self.__fiveImage, self.__sixImage,
+                            self.__sevenImage, self.__eightImage, self.__nineImage, "blank"]
 
 
         #set picture
@@ -69,14 +82,26 @@ class SlotMachine:
         self.__gameDisplay.fill(self.__black)
         text = self.__font.render("Score:" + str(score), False, self.__white)
         self.__gameDisplay.blit(text, (0, 0))
-        pygame.draw.rect(self.__gameDisplay, self.__gold, [95, 145, 620, 242])
-        self.__gameDisplay.blit(self.__imageList[jSpin], (100, 150))
-        self.__gameDisplay.blit(self.__imageList[kSpin], (305, 150))
-        self.__gameDisplay.blit(self.__imageList[lSpin], (510, 150))
+        pygame.draw.rect(self.__gameDisplay, self.__gold, [175, 185, 450, 160])
+        self.__gameDisplay.blit(self.__bgImage, (185, 195))
+        self.__gameDisplay.blit(self.__bgImage, (330, 195))
+        self.__gameDisplay.blit(self.__bgImage, (475, 195))
+        if jSpin == 9:
+            self.__gameDisplay.blit(self.__imageList[random.randint(0,8)], (190, 200))
+        else:
+            self.__gameDisplay.blit(self.__imageList[jSpin], (190, 200))
+        if kSpin == 9:
+            self.__gameDisplay.blit(self.__imageList[random.randint(0,8)], (335, 200))
+        else:
+            self.__gameDisplay.blit(self.__imageList[kSpin], (335, 200))
+        if lSpin == 9:
+            self.__gameDisplay.blit(self.__imageList[random.randint(0,8)], (480, 200))
+        else:
+            self.__gameDisplay.blit(self.__imageList[lSpin], (480, 200))
 
     def __getRandImage(self):
         # the number of random things to land on
-        randWheel = random.randint(1, 4)
+        randWheel = random.randint(0, 8)
         return randWheel
 
     def __addScore(self, score, firstWheel, secondWheel, thirdWheel):
@@ -95,16 +120,16 @@ class SlotMachine:
 
     def __gameLoop(self, score):
         game = True
-        jSpin = 0
+        jSpin = 9
         wheel1 = False
-        kSpin = 0
+        kSpin = 9
         wheel2 = False
-        lSpin = 0
+        lSpin = 9
         wheel3 = False
         while game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    game = False
+                    pygame.quit()
                 elif event.type == pygame.KEYDOWN:
                     # j, k and l will be the buttons to stop the corresponding
                     # wheel
@@ -118,7 +143,7 @@ class SlotMachine:
                         lSpin = self.__getRandImage()
                         wheel3 = True
             self.__drawSpins(jSpin, kSpin, lSpin, score)
-            if jSpin != 0 and kSpin != 0 and lSpin != 0:
+            if wheel1 and wheel2 and wheel3:
                 text = self.__font.render("Score:" + str(score), False, self.__black)
                 self.__gameDisplay.blit(text, (0, 0))
                 return [jSpin, kSpin, lSpin]
@@ -155,7 +180,6 @@ class SlotMachine:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:
                         return True
@@ -179,7 +203,7 @@ class SlotMachine:
             spins = self.__gameLoop(score)
             originalScore = score
             score = self.__addScore(score, spins[0], spins[1], spins[2])
-            if score - 5< 0:
+            if score - 5 < 0:
                 play = self.__welcomeLoop("Game Over! Play again?")
                 if play:
                     sendBack = True

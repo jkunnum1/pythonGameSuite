@@ -136,12 +136,8 @@ class HighScores:
 			for key in myDict:
 				scoresList.append(myDict[key][-1])
 
-			if len(myDict) > 0:
-				if len(myDict) > 3:
-					numScores = 3
-				else:
-					numScores = 1
-				for i in range(numScores):
+			for i in range(3):
+				try:
 					highest = max(scoresList)
 					found = False
 					for key in myDict:
@@ -151,11 +147,11 @@ class HighScores:
 					ranks += highKey +  "     :    " + str(highest) + "\n"
 					myDict.pop(highKey)
 					scoresList.remove(max(scoresList))
-			else:
-				ranks = "No scores yet!"
+				except:
+					ranks += "None     :    0\n"
 		except IOError:
 			ranks = "Invalid Entry"
-		self.__scoreLabel.configure(text=ranks)
+		self.__scoreLabel.configure(text=ranks, justify=LEFT)
 
 	def __score(self):
 		ranks = ""
@@ -165,12 +161,8 @@ class HighScores:
 			for key in myDict:
 				scoresList.append(myDict[key])
 
-			if len(myDict) > 0:
-				if len(myDict) > 3:
-					numScores = 3
-				else:
-					numScores = 1
-				for i in range(numScores):
+			for i in range(3):
+				try:
 					highest = max(scoresList)
 					found = False
 					for key in myDict:
@@ -179,9 +171,9 @@ class HighScores:
 							found = True
 					ranks += highKey +  "     :    " + str(myDict.pop(highKey)) + "\n"
 					scoresList.remove(max(scoresList))
-			else:
-				ranks = "No scores yet!"
+				except:
+					ranks += "None     :    0\n"
 		except IOError:
 			ranks = "Invalid Entry"
-		self.__scoreLabel.configure(text=ranks)
+		self.__scoreLabel.configure(text=ranks, justify=LEFT)
 

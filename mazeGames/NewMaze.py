@@ -146,7 +146,7 @@ class NewMaze:
 
             while gameOver:
                 # print instructions to continue and check for input
-                self.__messageToScreen("Game over, press p to play to e " +
+                self.__messageToScreen("Game over, press p to play or e " +
                                        "to exit", self.__red, score)
                 vehicle.moveX(0)
                 vehicle.drawVehicle()
