@@ -68,7 +68,7 @@ class HighScores:
                 "#d6edf5", border=0, font=("fixedsys", 6))
 
 		self.__scoreLabel = tkinter.Label(self.__content, text='',\
-                        font=("fixedsys",10), fg="#ff9900", bg="#d6edf5")
+                        font=("fixedsys",10), fg="#ff9900", bg="#004c66")
 
 		self.__buttons.grid()
 		self.__content.grid(row=1)
@@ -174,5 +174,5 @@ class HighScores:
 					ranks += "None     :    0\n"
 		except IOError:
 			ranks = "Invalid Entry"
-		self.__scoreLabel.configure(text=ranks, justify=LEFT)
+		self.__scoreLabel.configure(text=ranks, justify=LEFT, bg = "#c2e4f0")
 
