@@ -13,8 +13,8 @@
 import tkinter
 import pickle
 from tkinter import *
-#import tkinter.font as tkFont
 import verification
+
 
 class RegisterGUI:
     def __init__(self, users):
@@ -25,7 +25,7 @@ class RegisterGUI:
 
         self.__title = tkinter.Frame(self.__mainWindow)
         self.__buttons = tkinter.Frame(self.__mainWindow)
-        
+
         self.__titleText = tkinter.Label(self.__mainWindow,
                                          text="Register New User:",
                                          font=("fixedsys", 15), fg="#ff9900")
@@ -35,9 +35,11 @@ class RegisterGUI:
         # (Attribute) : input : status
         self.__userLabel = tkinter.Label(self.__mainWindow, text="Username:",
                                          font=("fixedsys", 10), fg="#ff9900")
-        self.__userEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
+        self.__userEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                         bg="#c2e4f0",
                                          font=("fixedsys", 10))
-        self.__userStatusLabel = tkinter.Label(self.__mainWindow, text = '', fg="#ff9900")
+        self.__userStatusLabel = tkinter.Label(self.__mainWindow, text='',
+                                               fg="#ff9900")
 
         self.__userLabel.configure(background="#004c66")
         self.__userStatusLabel.configure(background="#004c66")
@@ -47,19 +49,19 @@ class RegisterGUI:
         self.__userEntry.grid(row=1, column=1, sticky=E, padx=20, pady=1)
         self.__userStatusLabel.grid(row=2, column=1)
 
-
         # Create Password Widgets:
         self.__passLabel = tkinter.Label(self.__mainWindow, text="Password:",
                                          font=("fixedsys", 10), fg="#ff9900")
-        self.__passEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
-                                         font=("fixedsys", 10))
-        self.__placeholder = tkinter.Label(self.__mainWindow, text='', fg="#ff9900")
+        self.__passEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                         bg="#c2e4f0", font=("fixedsys", 10))
+        self.__placeholder = tkinter.Label(self.__mainWindow,
+                                           text='', fg="#ff9900")
 
         # Configure Password Entry Widget:
         self.__passEntry.config(show='*')
         self.__passLabel.configure(background="#004c66")
         self.__placeholder.configure(background="#004c66")
-        
+
         # grid Widgets:
         self.__passLabel.grid(row=3, column=0, sticky=W, padx=20, pady=1)
         self.__passEntry.grid(row=3, column=1, sticky=E, padx=20, pady=1)
@@ -70,8 +72,9 @@ class RegisterGUI:
                                                 text="Confirm Password:",
                                                 font=("fixedsys", 10),
                                                 fg="#ff9900")
-        self.__confirmPassEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
-                                         font=("fixedsys", 10))
+        self.__confirmPassEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                                bg="#c2e4f0",
+                                                font=("fixedsys", 10))
         self.__confirmPassStatusLabel = tkinter.Label(self.__mainWindow,
                                                       text='', fg="#ff9900")
 
@@ -81,8 +84,10 @@ class RegisterGUI:
         self.__confirmPassStatusLabel.configure(background="#004c66")
 
         # grid Widgets:
-        self.__confirmPassLabel.grid(row=5, column=0, sticky=W, padx=20, pady=1)
-        self.__confirmPassEntry.grid(row=5, column=1, sticky=E, padx=20, pady=1)
+        self.__confirmPassLabel.grid(row=5, column=0, sticky=W, padx=20,
+                                     pady=1)
+        self.__confirmPassEntry.grid(row=5, column=1, sticky=E, padx=20,
+                                     pady=1)
         self.__confirmPassStatusLabel.grid(row=6, column=1)
 
         # Create Name Input:
@@ -90,8 +95,9 @@ class RegisterGUI:
                                               text="First Name:",
                                               font=("fixedsys", 10),
                                               fg="#ff9900")
-        self.__firstNameEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
-                                         font=("fixedsys", 10))
+        self.__firstNameEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                              bg="#c2e4f0",
+                                              font=("fixedsys", 10))
         self.__firstNameStatusLabel = tkinter.Label(self.__mainWindow,
                                                     text='', fg="#ff9900")
 
@@ -105,14 +111,14 @@ class RegisterGUI:
 
         # Create Last Name Input:
         self.__lastNameLabel = tkinter.Label(self.__mainWindow,
-                                              text="Last Name:",
+                                             text="Last Name:",
                                              font=("fixedsys", 10),
                                              fg="#ff9900")
-        self.__lastNameEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
-                                         font=("fixedsys", 10))
+        self.__lastNameEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                             bg="#c2e4f0",
+                                             font=("fixedsys", 10))
         self.__lastNameStatusLabel = tkinter.Label(self.__mainWindow,
                                                    text='', fg="#ff9900")
-        
 
         self.__lastNameLabel.configure(background="#004c66")
         self.__lastNameStatusLabel.configure(background="#004c66")
@@ -121,15 +127,16 @@ class RegisterGUI:
         self.__lastNameLabel.grid(row=9, column=0, sticky=W, padx=20, pady=1)
         self.__lastNameEntry.grid(row=9, column=1, sticky=E, padx=20, pady=1)
         self.__lastNameStatusLabel.grid(row=10, column=1)
-        
+
         # Create email Input:
         self.__emailLabel = tkinter.Label(self.__mainWindow,
                                           text="Email:", font=("fixedsys",
                                                                10),
                                           fg="#ff9900")
-        self.__emailEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
-                                          font=("fixedsys", 10))
-        self.__emailStatusLabel = tkinter.Label(self.__mainWindow, text='', fg="#ff9900")
+        self.__emailEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                          bg="#c2e4f0", font=("fixedsys", 10))
+        self.__emailStatusLabel = tkinter.Label(self.__mainWindow, text='',
+                                                fg="#ff9900")
 
         self.__emailLabel.configure(background="#004c66")
         self.__emailStatusLabel.configure(background="#004c66")
@@ -143,9 +150,11 @@ class RegisterGUI:
         self.__ageLabel = tkinter.Label(self.__mainWindow,
                                         text="Age:", font=("fixedsys", 10),
                                         fg="#ff9900")
-        self.__ageEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
-                                         font=("fixedsys", 10))
-        self.__ageStatusLabel = tkinter.Label(self.__mainWindow, text='', fg="#ff9900")
+        self.__ageEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                        bg="#c2e4f0",
+                                        font=("fixedsys", 10))
+        self.__ageStatusLabel = tkinter.Label(self.__mainWindow, text='',
+                                              fg="#ff9900")
 
         self.__ageLabel.configure(background="#004c66")
         self.__ageStatusLabel.configure(background="#004c66")
@@ -164,18 +173,16 @@ class RegisterGUI:
         self.__cancelButton = tkinter.Button(self.__buttons, text="Cancel",
                                              command=self.__cancel,
                                              relief="groove", bg="#c2e4f0",
-                                             activebackground="#d6edf5", border=0,
-                                             font=("fixedsys", 6))
-        #self.__regButton.configure(background="#004c66")
-        #self.__cancelButton.configure(background="#004c66")
+                                             activebackground="#d6edf5",
+                                             border=0, font=("fixedsys", 6))
+
         # grid buttons:
         self.__regButton.grid(row=15, column=0, sticky=E, padx=1)
         self.__cancelButton.grid(row=15, column=1, sticky=W, padx=1)
-        
+
         self.__buttons.configure(background="#004c66")
         # grid button frame:
         self.__buttons.grid(columnspan=2, padx=7, pady=20)
-        
 
         tkinter.mainloop()
 
@@ -188,10 +195,12 @@ class RegisterGUI:
             self.__confirmPassStatusLabel.config(text="Invalid password(s)!")
             self.__registered = False
         if not results[2]:
-            self.__firstNameStatusLabel.config(text="First name cannot be blank!")
+            self.__firstNameStatusLabel.config(text="First name " +
+                                               "cannot be blank!")
             self.__registered = False
         if not results[3]:
-            self.__lastNameStatusLabel.config(text="Last name cannot be blank!")
+            self.__lastNameStatusLabel.config(text="Last name cannot " +
+                                              "be blank!")
             self.__registered = False
         if not results[4]:
             self.__emailStatusLabel.config(text="Invalid email!")
@@ -201,9 +210,8 @@ class RegisterGUI:
             self.__registered = False
         if False not in results:
             self.__mainWindow.destroy()
-        return results[0] and results[1] and results[2] and results[3] and \
-               results[4] and results[5]
-        
+        return(results[0] and results[1] and results[2] and results[3] and
+               results[4] and results[5])
 
     def __process(self):
         self.__userStatusLabel.config(text='')
@@ -228,7 +236,6 @@ class RegisterGUI:
                            lastName, email, age, 0]
             self.__users[user] = self.__info
             pickle.dump(self.__users, open("users.dat", "wb"))
-        
 
     def __cancel(self):
         self.__registered = False
