@@ -70,7 +70,6 @@ class HighScores:
 		self.__scoreLabel = tkinter.Label(self.__content, text='',\
                         font=("fixedsys",10), fg="#ff9900", bg="#d6edf5")
 
-		self.__mainWindow.geometry("350x100")
 		self.__buttons.grid()
 		self.__content.grid(row=1)
 		self.__mazeScore.grid(row=0, column=0, sticky=E, padx=1)

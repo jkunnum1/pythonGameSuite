@@ -53,10 +53,10 @@ class Maze():
         pygame.display.set_caption('Mazerunner')
         # set background
         self.__backgroundImage = pygame.image.load("mazeGames" +
-                                "/mazeBackground.png").convert()
+                                "/images/mazeBackground.png").convert()
         self.__gameDisplay.blit(self.__backgroundImage, [0, 0])
         # set power-up image
-        self.__powerUpImg = pygame.image.load("mazeGames/powerUp.png").convert()
+        self.__powerUpImg = pygame.image.load("mazeGames/images/powerUp.png").convert()
         # updates the surface
         pygame.display.update()
         # frames per second and font

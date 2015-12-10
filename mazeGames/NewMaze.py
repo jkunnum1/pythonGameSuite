@@ -56,8 +56,8 @@ class NewMaze:
         # set title of the game
         pygame.display.set_caption('Mazerunner')
         # set background
-        self.__backgroundImage = pygame.image.load("mazeGames/mazeBack" +
-                                                   "ground.png").convert()
+        self.__backgroundImage = pygame.image.load("mazeGames/images/maze" +
+                                                   "Background.png").convert()
         self.__gameDisplay.blit(self.__backgroundImage, [0, 0])
 
         # updates the surface

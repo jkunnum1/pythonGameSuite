@@ -34,7 +34,7 @@ class Hangman:
         self.__displayHeight = 600
 
         # Import image to be used as icon
-        self.__icon = pygame.image.load("Hangman/hangman32.png")
+        self.__icon = pygame.image.load("Hangman/image/hangman32.png")
 
         # Create a window with given dimensions and a caption and picture
         self.__gameDisplay = pygame.display.set_mode((self.__displayWidth, self.__displayHeight))
@@ -200,13 +200,13 @@ class Hangman:
     ##Narrative: Display puzzle, points, and strikes to window
     def __displayToScreen(self, points, strikes, length, correctGuesses=[['', [0, 1]], ['', [2, 3]]], incorrectGuesses=[], localHigh=0):
         # Import images of figure with varying numbers of limbs
-        zeroLimbs = pygame.image.load("Hangman/hangman1000.png")
-        oneLimb = pygame.image.load("Hangman/hangman1001.png")
-        twoLimbs = pygame.image.load("Hangman/hangman1002.png")
-        threeLimbs = pygame.image.load("Hangman/hangman1003.png")
-        fourLimbs = pygame.image.load("Hangman/hangman1004.png")
-        fiveLimbs = pygame.image.load("Hangman/hangman1005.png")
-        sixLimbs = pygame.image.load("Hangman/hangman1006.png")
+        zeroLimbs = pygame.image.load("Hangman/image/hangman1000.png")
+        oneLimb = pygame.image.load("Hangman/image/hangman1001.png")
+        twoLimbs = pygame.image.load("Hangman/image/hangman1002.png")
+        threeLimbs = pygame.image.load("Hangman/image/hangman1003.png")
+        fourLimbs = pygame.image.load("Hangman/image/hangman1004.png")
+        fiveLimbs = pygame.image.load("Hangman/image/hangman1005.png")
+        sixLimbs = pygame.image.load("Hangman/image/hangman1006.png")
 
         # Fill window with white
         self.__gameDisplay.fill(self.__white)

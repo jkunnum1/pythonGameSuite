@@ -49,15 +49,15 @@ class GuitarHero:
         # set title of the game
         pygame.display.set_caption('Guitar Hero')
         # load all the images for the game
-        self.__blueFill = pygame.image.load("guitarHero/blueFill.png").convert()
-        self.__blueOpen = pygame.image.load("guitarHero/blueOpen.png").convert()
-        self.__greenFill = pygame.image.load("guitarHero/greenFill.png").convert()
-        self.__greenOpen = pygame.image.load("guitarHero/greenOpen.png").convert()
-        self.__orangeFill = pygame.image.load("guitarHero/orangeFill.png").convert()
-        self.__orangeOpen = pygame.image.load("guitarHero/orangeOpen.png").convert()
-        self.__redFill = pygame.image.load("guitarHero/redFill.png").convert()
-        self.__redOpen = pygame.image.load("guitarHero/redOpen.png").convert()
-        self.__meter = pygame.image.load("guitarHero/meter.png").convert()
+        self.__blueFill = pygame.image.load("guitarHero/image/blueFill.png").convert()
+        self.__blueOpen = pygame.image.load("guitarHero/image/blueOpen.png").convert()
+        self.__greenFill = pygame.image.load("guitarHero/image/greenFill.png").convert()
+        self.__greenOpen = pygame.image.load("guitarHero/image/greenOpen.png").convert()
+        self.__orangeFill = pygame.image.load("guitarHero/image/orangeFill.png").convert()
+        self.__orangeOpen = pygame.image.load("guitarHero/image/orangeOpen.png").convert()
+        self.__redFill = pygame.image.load("guitarHero/image/redFill.png").convert()
+        self.__redOpen = pygame.image.load("guitarHero/image/redOpen.png").convert()
+        self.__meter = pygame.image.load("guitarHero/image/meter.png").convert()
 
         self.__gameDisplay.fill(self.__black)
         # updates the surface
@@ -68,9 +68,14 @@ class GuitarHero:
         self.__framePerSec = 15
         self.__font = pygame.font.SysFont(None, 40)
 
+        songList = ["missMurder.wav", "lonelyBoy.wav"]
         play = True
         while play:
+            pygame.mixer.music.load("guitarHero/" +
+                                    songList[random.randint(0,1)])
+            pygame.mixer.music.play(-1, 0.0)
             play = self.__gameLoop()
+            pygame.mixer.music.stop()
         # un-initializes and quits pygame
         pygame.quit()
 
@@ -97,6 +102,7 @@ class GuitarHero:
                 # print instructions to continue and check for input
                     self.__messageToScreen("Game over, press p to play or e to exit",
                         score)
+                self.__drawBasics(blueImage, greenImage, orangeImage, redImage)
                 pygame.display.update()
                 for event in pygame.event.get():
                     if (event.type == pygame.QUIT or
@@ -145,7 +151,7 @@ class GuitarHero:
                     if event.key == pygame.K_SEMICOLON:
                         redImage = self.__redOpen
             counter += 1
-            if counter % 7 == 0:
+            if counter % 8 == 0:
                 meter += 1
                 randNum = random.randint(1,2)
                 if randNum == 1:
