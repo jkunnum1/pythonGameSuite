@@ -10,9 +10,11 @@
 # Rebecca Trackman
 # A 52
 
+
 import pickle
 import LoginGUI
 import MainMenuGUI
+
 
 def login():
     users = pickle.load(open("users.dat", "rb"))
@@ -27,7 +29,7 @@ def login():
             menu = MainMenuGUI.MyGUI()
             userOnline = []
             pickle.dump(userOnline, open("userOnline.dat", "wb"))
-            
+
     except:
         print("Unexpected Hault!")
 
