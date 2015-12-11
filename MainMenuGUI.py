@@ -23,7 +23,7 @@ from mazeGames import NewMaze
 
 from guitarHero import GuitarHero
 
-from Hangman import Hangman
+from hangman import Hangman
 
 from slotmachine import SlotMachine
 
