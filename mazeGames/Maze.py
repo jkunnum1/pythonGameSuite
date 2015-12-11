@@ -1,13 +1,13 @@
 # Project
-# William McLaughlin
-# A 51
-# S. Douglas Wehbe
-# A 52
-# Julie Kunnumpurath
+# Kunnumpurath, Julie
 # A 53
-# John Henry Burns
+# McLaughlin, William
+# A 51
+# Wehbe, Semaan
 # A 52
-# Rebecca Trackman
+# Burns, John Henry
+# A 52
+# Trackman, Rebecca
 # A 52
 
 import pygame

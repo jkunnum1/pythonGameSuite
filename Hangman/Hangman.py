@@ -1,3 +1,15 @@
+# Project
+# Kunnumpurath, Julie
+# A 53
+# McLaughlin, William
+# A 51
+# Wehbe, Semaan
+# A 52
+# Burns, John Henry
+# A 52
+# Trackman, Rebecca
+# A 52
+
 import pygame
 import time
 from pygame import font
