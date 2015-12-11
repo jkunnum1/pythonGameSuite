@@ -21,7 +21,7 @@ from mazeGames import Maze
 
 from mazeGames import NewMaze
 
-from guitarHero import GuitarHero
+from GuitarHero import GuitarHero
 
 from hangman import Hangman
 
@@ -50,8 +50,8 @@ class MyGUI:
         # Welcome message in main window
         self.__welcome = tkinter.Label(self.__title, text="Hello " +
                                        user+", and welcome to\n the python" +
-                                       "game suite! Please select a\n game you"
-                                       + "would like to play!",
+                                       "game suite! Please select a\n " +
+                                       "game you would like to play!",
                                        font=("fixedsys", 15), fg="#ff9900")
         self.__welcome.configure(background="#004c66")
 

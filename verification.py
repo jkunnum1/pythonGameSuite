@@ -9,6 +9,7 @@
 # Rebecca Trackman
 # A 52
 
+
 def emailVerify(rawEmail):
     checkEmail = rawEmail.replace('@', '')
     checkEmail = checkEmail.replace('.', '')
@@ -42,6 +43,7 @@ def emailVerify(rawEmail):
         valid = False
 
     return valid
+
 
 def verify(info, users):
     if info[0] in users or info[0] == '':

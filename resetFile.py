@@ -19,3 +19,4 @@ if verify == "DELETEALL":
     print("Done.")
 else:
     print("Operation cancelled.")
+

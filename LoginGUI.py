@@ -16,6 +16,7 @@ import pickle
 import registration
 import RegisterGUI
 
+
 class LoginGUI:
     def __init__(self, users):
         self.__users = users
@@ -32,9 +33,9 @@ class LoginGUI:
                                      font=("fixedsys", 15), fg="#ff9900")
         self.__userLabel = tkinter.Label(self.__mainWindow, text="Username:",
                                          font=("fixedsys", 10), fg="#ff9900")
-        self.__userEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
-                                         font=("fixedsys", 10))
-        #Configure:
+        self.__userEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                         bg="#c2e4f0", font=("fixedsys", 10))
+        # Configure:
         self.__title.configure(background="#004c66")
         self.__userLabel.configure(background="#004c66")
         # Pack Widgets:
@@ -44,8 +45,8 @@ class LoginGUI:
         # Create Widgets
         self.__passLabel = tkinter.Label(self.__mainWindow, text="Password:",
                                          font=("fixedsys", 10), fg="#ff9900")
-        self.__passEntry = tkinter.Entry(self.__mainWindow, width=13, bg="#c2e4f0",
-                                         font=("fixedsys", 10))
+        self.__passEntry = tkinter.Entry(self.__mainWindow, width=13,
+                                         bg="#c2e4f0", font=("fixedsys", 10))
         # Configure Password Entry Widget:
         self.__passEntry.configure(show='*')
         self.__passLabel.configure(background="#004c66")
@@ -55,11 +56,11 @@ class LoginGUI:
         # Create Login Status Zone:
         self.__result = tkinter.StringVar()
         self.__statusLabel = tkinter.Label(self.__statusZone,
-                                      textvariable=self.__result)
+                                           textvariable=self.__result)
         self.__statusLabel.configure(background="#004c66", fg="#ff9900")
         # Pack Status
         self.__statusLabel.grid(row=3, padx=10, sticky=NSEW)
-        
+
         # Create Buttons:
         self.__logButton = tkinter.Button(self.__bottomFrame, text="Login",
                                           command=self.__login,
@@ -117,3 +118,4 @@ class LoginGUI:
 
     def __update(self):
         self.__users = pickle.load(open("users.dat", "rb"))
+
