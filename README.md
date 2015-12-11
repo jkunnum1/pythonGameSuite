@@ -8,13 +8,15 @@ Rebecca Trackman  --  A 52
 
 This is a pygame suite where users can accumulate points by playing games such as slots, hangman, etc
 
-First game: Maze Flyer
+First game: Maze Flyer!
 
-Third game: second Maze game
+Second game: Hangman!
 
-Second game: Hangman
+Third game: second Maze game!
 
-Fourth game: Guitar Hero
+Fourth game: Guitar Hero!
+
+Fifth game: Slot Machine!
 
 -----To play the game----
 Start the program by running the 'start.py' file. From there, either create a new user or sign in with your username and password. After that, enjoy!

@@ -21,7 +21,7 @@ from mazeGames import Maze
 
 from mazeGames import NewMaze
 
-from GuitarHero import GuitarHero
+from guitarHero import GuitarHero
 
 from hangman import Hangman
 
@@ -73,7 +73,7 @@ class MyGUI:
 
         # Hangman button
         self.__hangManButton = tkinter.Button(self.__buttons, relief="groove",
-                                              text="Hang Man",
+                                              text="Hangman",
                                               command=self.openHangMan,
                                               bg="#c2e4f0",
                                               activebackground="#d6edf5",
@@ -91,7 +91,7 @@ class MyGUI:
 
         # Slotmachine button
         self.__slotButton = tkinter.Button(self.__buttons, relief="groove",
-                                           text="Slot machine",
+                                           text="Slot Machine",
                                            command=self.openSlots,
                                            bg="#c2e4f0",
                                            activebackground="#d6edf5",

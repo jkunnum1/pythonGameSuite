@@ -559,17 +559,22 @@ class Hangman:
 
     # Narrative: Record points
     def __exportToFile(self):
-        # Call gameLoop()
-        localScores = self.__gameLoop()
+        try:
+            # Call gameLoop()
+            localScores = self.__gameLoop()
 
-        # Add to high score
-        if max(localScores) > self.__highScores[self.__user[0]]:
-            self.__highScores[self.__user[0]] = max(localScores)
-            pickle.dump(self.__highScores, open("Hangman/hangmanScores.dat",
-                                                "wb"))
+        except:
+            num = 1
 
-        # Add to total score
-        self.__user[-1] = (self.__allUsers[self.__user[0]][-1] +
-                           sum(localScores))
-        self.__allUsers[self.__user[0]] = self.__user
-        pickle.dump(self.__allUsers, open("users.dat", "wb"))
+        else:
+            # Add to high score
+            if max(localScores) > self.__highScores[self.__user[0]]:
+                self.__highScores[self.__user[0]] = max(localScores)
+                pickle.dump(self.__highScores, open("Hangman/hangmanScores.dat",
+                                                    "wb"))
+
+            # Add to total score
+            self.__user[-1] = (self.__allUsers[self.__user[0]][-1] +
+                               sum(localScores))
+            self.__allUsers[self.__user[0]] = self.__user
+            pickle.dump(self.__allUsers, open("users.dat", "wb"))

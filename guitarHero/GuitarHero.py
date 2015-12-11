@@ -203,7 +203,7 @@ class GuitarHero:
 
     # prints whatever message you give with color specified
     def __messageToScreen(self, msg, score):
-        if score > self.__highScores[self.__user[0]]:
+        if score < self.__highScores[self.__user[0]] or self.__highScores[self.__user[0]] == 0:
             msg2 = "You have a new high of " + str(score)
             # SAVE HIGH SCORE
             try:
