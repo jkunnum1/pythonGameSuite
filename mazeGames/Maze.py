@@ -21,14 +21,12 @@ class Maze():
     def __init__(self):
         pygame.init()
 
-        ############################
         '''LOAD ONLINE USER'''
         self.__allUsers = pickle.load(open("users.dat", "rb"))
         self.__user = pickle.load(open("userOnline.dat", "rb"))
         self.__highScores = pickle.load(open("mazeGames/mazeScores.dat", "rb"))
-        ############################
-        #  append score each time there is a game over  #
-        ### LOAD HIGHSCORE TO TOTAL SCORE TO BE SHOWN ###
+        #  append score each time there is a game over
+        # LOAD HIGHSCORE TO TOTAL SCORE TO BE SHOWN
         self.__highestScore = 0
         try:
             self.__highestScore = self.__highScores[self.__user[0]]
@@ -52,11 +50,12 @@ class Maze():
         # set title of the game
         pygame.display.set_caption('Mazerunner')
         # set background
-        self.__backgroundImage = pygame.image.load("mazeGames" +
-                                "/images/mazeBackground.png").convert()
+        self.__backgroundImage = pygame.image.load("mazeGames/images/maze" +
+                                                   "Background.png").convert()
         self.__gameDisplay.blit(self.__backgroundImage, [0, 0])
         # set power-up image
-        self.__powerUpImg = pygame.image.load("mazeGames/images/powerUp.png").convert()
+        self.__powerUpImg = pygame.image.load("mazeGames/images/" +
+                                              "powerUp.png").convert()
         # updates the surface
         pygame.display.update()
         # frames per second and font
@@ -98,12 +97,12 @@ class Maze():
                 pygame.display.update()
                 for event in pygame.event.get():
                     if (event.type == pygame.QUIT or
-                       (event.type == pygame.KEYDOWN and
-                       event.key == pygame.K_e)):
+                            (event.type == pygame.KEYDOWN and
+                             event.key == pygame.K_e)):
                         self.__addToTotal(score)
                         return False
                     if (event.type == pygame.KEYDOWN and
-                        event.key == pygame.K_p):
+                            event.key == pygame.K_p):
                         self.__addToTotal(score)
                         return True
             # for every time that there is an event
@@ -128,13 +127,13 @@ class Maze():
                         vehicle.moveX(0)
             # check that the vehicle is still on the screen
             if (vehicle.getX() >= self.__displayWidth or vehicle.getX() < 0 or
-                 vehicle.getY() >= self.__displayHeight or vehicle.getY() < 0):
+                    vehicle.getY() >= self.__displayHeight or
+                    vehicle.getY() < 0):
                 gameOver = True
             self.__gameDisplay.blit(self.__backgroundImage, [0, 0])
             vehicle.drawVehicle()
             # make rectangle (where, color, [coordinateX, coordinateY,
             # width, height])
-#####
             for obj in barriers:
                 obj.moveY()
                 pygame.draw.rect(self.__gameDisplay, color,
@@ -142,9 +141,9 @@ class Maze():
                                   self.__blockSize])
                 # check to see if there is a collision, else add point to score
                 if powerUsedCount == 0:
-                    if ((vehicle.getX() >= obj.getX() and
-                         vehicle.getX() + 10 <= obj.getX() + obj.getWidth())
-                         and vehicle.getY() == obj.getY()):
+                    if (vehicle.getX() + 10 <= obj.getX() + obj.getWidth() and
+                            vehicle.getX() >= obj.getX() and
+                            vehicle.getY() == obj.getY()):
                         gameOver = True
                 if obj.getY() - 10 == vehicle.getY():
                     score += 1
@@ -152,7 +151,6 @@ class Maze():
                 if powerUsedCount + 10 == score:
                     powerUsedCount = 0
                     color = self.__black
-#####
             self.__displayScore(score)
             counter += 1
             # check to see if it's time to add a new barrier and
@@ -198,23 +196,30 @@ class Maze():
     def __messageToScreen(self, msg, color, score):
         if score > self.__highScores[self.__user[0]]:
             msg2 = "You have a new high of " + str(score)
-            ###### SAVE HIGH SCORE ######
-            self.__highestScore = score
-            self.__highScores[self.__user[0]] = self.__highestScore
-            pickle.dump(self.__highScores, open("mazeGames/mazeScores.dat", "wb"))
-            #############################
+            # SAVE HIGH SCORE
+            try:
+                self.__highestScore = score
+                self.__highScores[self.__user[0]] = self.__highestScore
+                pickle.dump(self.__highScores, open("mazeGames/" +
+                                                    "mazeScores.dat", "wb"))
+            except:
+                print("Couldn't save the new high score")
+            #
             screenText = self.__font.render(msg2, True, color)
             self.__gameDisplay.blit(screenText, [self.__displayWidth // 4, 40])
         screenText = self.__font.render(msg, True, color)
         self.__gameDisplay.blit(screenText, [self.__displayWidth // 4, 0])
 
     def __addToTotal(self, score):
-        ##### ADD TO THE TOTAL SCORE #####
-        self.__user[-1] = self.__allUsers[self.__user[0]][-1] + score
-        self.__allUsers[self.__user[0]] = self.__user
-        pickle.dump(self.__allUsers, open("users.dat", "wb"))
-        ##################################
-        
+        try:
+            # ADD TO THE TOTAL SCORE
+            self.__user[-1] = self.__allUsers[self.__user[0]][-1] + score
+            self.__allUsers[self.__user[0]] = self.__user
+            pickle.dump(self.__allUsers, open("users.dat", "wb"))
+            #
+        except:
+            print("Couldn't save to users.dat")
+
     # adds a new barrier to the list
     def __addBarrier(self, barriers):
         barrier = Barriers.Barriers(self.__displayWidth, self.__displayHeight,

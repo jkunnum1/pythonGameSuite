@@ -21,14 +21,13 @@ class NewMaze:
     def __init__(self):
         pygame.init()
 
-        ############################
         '''LOAD ONLINE USER'''
         self.__allUsers = pickle.load(open("users.dat", "rb"))
         self.__user = pickle.load(open("userOnline.dat", "rb"))
-        self.__highScores = pickle.load(open("mazeGames/mazeScores2.dat", "rb"))
-        ############################
+        self.__highScores = pickle.load(open("mazeGames/" +
+                                             "mazeScores2.dat", "rb"))
         #  append score each time there is a game over  #
-        ### LOAD HIGHSCORE TO TOTAL SCORE TO BE SHOWN ###
+        # LOAD HIGHSCORE TO TOTAL SCORE TO BE SHOWN #
         self.__highestScore = 0
         try:
             self.__highestScore = self.__highScores[self.__user[0]]
@@ -100,7 +99,7 @@ class NewMaze:
                         vehicle.moveX(self.__blockSize)
                 if event.type == pygame.KEYUP:
                     if (event.key == pygame.K_LEFT or
-                        event.key == pygame.K_RIGHT):
+                            event.key == pygame.K_RIGHT):
                         vehicle.moveX(0)
             # check that the vehicle is still on the screen
             if ((vehicle.getX() >= self.__displayWidth or
@@ -181,22 +180,21 @@ class NewMaze:
     def __messageToScreen(self, msg, color, score):
         if score > self.__highScores[self.__user[0]]:
             msg2 = "You have a new high of " + str(score)
-            ##### SAVE HIGH SCORE ######
+            # SAVE HIGH SCORE
             self.__highestScore = score
             self.__highScores[self.__user[0]] = self.__highestScore
-            pickle.dump(self.__highScores, open("mazeGames/mazeScores2.dat", "wb"))
-            #############################
+            pickle.dump(self.__highScores, open("mazeGames/maze" +
+                                                "Scores2.dat", "wb"))
             screenText = self.__font.render(msg2, True, color)
             self.__gameDisplay.blit(screenText, [self.__displayWidth // 4, 40])
         screenText = self.__font.render(msg, True, color)
         self.__gameDisplay.blit(screenText, [self.__displayWidth // 4, 0])
 
     def __addToTotal(self, score):
-        ##### ADD TO THE TOTAL SCORE #####
+        # ADD TO THE TOTAL SCORE
         self.__user[-1] = self.__allUsers[self.__user[0]][-1] + score
         self.__allUsers[self.__user[0]] = self.__user
         pickle.dump(self.__allUsers, open("users.dat", "wb"))
-        ##################################
 
     # adds a new barrier to the list
     def __addBarrier(self, barriers, leadX=0, move=20):

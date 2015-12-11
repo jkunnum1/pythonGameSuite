@@ -12,17 +12,17 @@
 
 import random
 
+
 class Barriers:
     def __init__(self, displayWidth, displayHeight, blockSize):
         # start at -50 so that images are more likely to appear
         # on the left side of the screen
-        self.__randX = round(random.randrange(-50, displayWidth) / 10.0) * 10.0
+        self.__randX = round(random.randrange(-50, displayWidth) / 10) * 10
         self.__randWidth = round(random.randrange(displayWidth // 4,
-                                                  displayWidth // 3) / 10.0) * 10.0
+                                                  displayWidth // 3) / 10) * 10
         if self.__randX + self.__randWidth > displayWidth:
             self.__randX = displayWidth - self.__randWidth
         self.__randY = 10
-        
 
     def moveY(self):
         self.__randY += 10
@@ -35,10 +35,8 @@ class Barriers:
 
     def getWidth(self):
         return self.__randWidth
-    
+
     def __str__(self):
         return ("Random x: " + str(self.__randX) +
                 "\nRandom width: " + str(self.__randWidth) +
                 "\nRandom y: " + str(self.__randY))
-
-    
