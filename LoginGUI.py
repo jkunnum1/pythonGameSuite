@@ -13,6 +13,7 @@
 import tkinter
 from tkinter import *
 import pickle
+import registration
 import RegisterGUI
 
 

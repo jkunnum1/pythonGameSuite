@@ -91,7 +91,7 @@ class HighScores:
         self.__guitarScores.configure(bg="#addbeb")
         self.__hangman.configure(bg="#addbeb")
         self.__totalScore.configure(bg="#addbeb")
-        self.__score(True)
+        self.__score()
 
     def __maze2(self):
         self.__filename = "mazeGames/mazeScores2.dat"
@@ -100,7 +100,7 @@ class HighScores:
         self.__guitarScores.configure(bg="#addbeb")
         self.__hangman.configure(bg="#addbeb")
         self.__totalScore.configure(bg="#addbeb")
-        self.__score(True)
+        self.__score()
 
     def __guitarHero(self):
         self.__filename = "guitarHero/guitarHero.dat"
@@ -109,7 +109,7 @@ class HighScores:
         self.__guitarScores.configure(bg="#ebf6fa")
         self.__hangman.configure(bg="#addbeb")
         self.__totalScore.configure(bg="#addbeb")
-        self.__score(False)
+        self.__score()
 
     def __hangman(self):
         self.__filename = "Hangman/hangmanScores.dat"
@@ -118,7 +118,7 @@ class HighScores:
         self.__guitarScores.configure(bg="#addbeb")
         self.__hangman.configure(bg="#ebf6fa")
         self.__totalScore.configure(bg="#addbeb")
-        self.__score(True)
+        self.__score()
 
     def __total(self):
         self.__filename = "users.dat"
@@ -150,15 +150,14 @@ class HighScores:
                         myDict.pop(highKey)
                         scoresList.remove(max(scoresList))
                     except:
-                        ranks += "None     :    --\n"
+                        ranks += "None     :    0\n"
             else:
                 ranks = "No scores yet!"
         except IOError:
             ranks = "Invalid Entry"
         self.__scoreLabel.configure(text=ranks)
-    # normal refers to whether the high score if supposed to be the 
-    # highest number of the lowest number
-    def __score(self, normal):
+
+    def __score(self):
         ranks = ""
         try:
             myDict = pickle.load(open(self.__filename, "rb"))
@@ -170,8 +169,6 @@ class HighScores:
                 for i in range(3):
                     try:
                         highest = max(scoresList)
-                        if not normal:
-                            highest = min(scoresList)
                         found = False
                         for key in myDict:
                             if not found and myDict[key] == highest:
@@ -179,12 +176,9 @@ class HighScores:
                                 found = True
                         ranks += (highKey + "     :    " +
                                   str(myDict.pop(highKey)) + "\n")
-                        if normal:
-                            scoresList.remove(max(scoresList))
-                        else:
-                            scoresList.remove(min(scoresList))
+                        scoresList.remove(max(scoresList))
                     except:
-                        ranks += "None     :    --\n"
+                        ranks += "None     :    0\n"
             else:
                 ranks = "No scores yet!"
         except IOError:

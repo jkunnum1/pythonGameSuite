@@ -104,16 +104,17 @@ class GuitarHero:
         targets.append(Notes.Notes())
         while not gameExit:
             self.__gameDisplay.fill(self.__black)
-            # there is a game over, print the message for winning
             while gameOver:
                 if checkWin:
                     self.__messageToScreen("You won! Press p to play or " +
                                            "e to exit", score)
+                else:
+                    # print instructions to continue and check for input
+                    self.__messageToScreen("Game over, press p to play or" +
+                                           " e to exit", score)
                 self.__drawBasics(blueImage, greenImage, orangeImage, redImage)
                 pygame.display.update()
                 for event in pygame.event.get():
-                    # regardless of whether they quit or not, add to total
-                    # score. Then either return True or False
                     if (event.type == pygame.QUIT or
                             (event.type == pygame.KEYDOWN and
                              event.key == pygame.K_e)):
@@ -163,17 +164,13 @@ class GuitarHero:
                         redImage = self.__redOpen
                     else:
                         redImage = redImage
-            # increment the counter each time to determine the next time
-            # for a note to appear
             counter += 1
             if counter % 8 == 0:
                 meter += 1
                 randNum = random.randint(1, 2)
-                # 50% probability that a new note will apear
                 if randNum == 1:
                     targets.append(Notes.Notes())
                 counter = 1
-            # draw the items to the screen
             self.__drawBasics(blueImage, greenImage, orangeImage, redImage)
             score = self.__displayNotes(targets, score)
             checkWin = self.__displayScore(score, meter)
