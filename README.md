@@ -1,7 +1,7 @@
 # pythonGameSuite
 Authors: 
 William McLaughlin  --  A 51
-Semaan Wehbe  --  A 52
+S. Douglas Wehbe  --  A 52
 Julie Kunnumpurath  --  A 53
 John Henry Burns  --  A 52
 Rebecca Trackman  --  A 52

@@ -1,13 +1,13 @@
 # Project
-# Kunnumpurath, Julie
-# A 53
-# McLaughlin, William
+# William McLaughlin
 # A 51
-# Wehbe, Semaan
+# S. Douglas Wehbe
 # A 52
-# Burns, John Henry
+# Julie Kunnumpurath
+# A 53
+# John Henry Burns
 # A 52
-# Trackman, Rebecca
+# Rebecca Trackman
 # A 52
 
 import random
